@@ -18,7 +18,7 @@ export const waitlistRouter = createTRPCRouter({
     .mutation(async ({ ctx, input }) => {
       const trim = (value?: string) => {
         const trimmed = value?.trim();
-        return trimmed ? trimmed : null;
+        return trimmed ?? null;
       };
 
       await ctx.db

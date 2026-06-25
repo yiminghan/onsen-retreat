@@ -9,7 +9,7 @@ import { Toaster } from "~/components/ui/sonner";
 export const metadata: Metadata = {
   title: "Onsen Retreat — Stillness, Steam, Solitude",
   description:
-    "A cinematic onsen retreat. Disappear into the steam. Sign up to be the first to know when the doors open.",
+    "Bring your project and lock in for one week at a remote onsen town with no distractions.",
   icons: [{ rel: "icon", url: "/icon.svg", type: "image/svg+xml" }],
 };
 
