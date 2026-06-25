@@ -51,7 +51,7 @@ export function SignupDialog({ children }: { children: React.ReactNode }) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="border-none bg-night text-steam ring-1 ring-onsen/15 sm:max-w-md">
+      <DialogContent className="max-h-[90dvh] overflow-y-auto border-none bg-night text-steam ring-1 ring-onsen/15 sm:max-w-md">
         <DialogHeader>
           <DialogTitle className="text-2xl font-extralight tracking-tight text-steam">
             Sign up
