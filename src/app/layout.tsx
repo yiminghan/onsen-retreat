@@ -2,7 +2,7 @@ import "~/styles/globals.css";
 
 import { type Metadata } from "next";
 import { Geist, Cormorant_Garamond } from "next/font/google";
-
+import { Analytics } from "@vercel/analytics/next"
 import { TRPCReactProvider } from "~/trpc/react";
 import { Toaster } from "~/components/ui/sonner";
 
@@ -30,6 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geist.variable} ${cormorant.variable}`}>
       <body>
+        <Analytics />
         <TRPCReactProvider>{children}</TRPCReactProvider>
         <Toaster />
       </body>
