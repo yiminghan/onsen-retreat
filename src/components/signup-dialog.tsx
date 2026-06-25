@@ -57,9 +57,9 @@ export function SignupDialog({ children }: { children: React.ReactNode }) {
             Sign up
           </DialogTitle>
           <DialogDescription className="font-light leading-relaxed text-steam/60">
-            Tell us a little about yourself!
+            Our first cohort runs Oct 2026. Tell us a little about yourself!
             <br />
-            The more people that signs up the more chances we have at securing bigger sponsorships and providing a better experience!
+            The more people who sign up, the more chances we have at securing bigger sponsorships and providing a better experience!
           </DialogDescription>
         </DialogHeader>
         <form
@@ -120,6 +120,9 @@ export function SignupDialog({ children }: { children: React.ReactNode }) {
               onChange={(e) => setSchool(e.target.value)}
               className={fieldClass}
             />
+            <p className="text-md font-light tracking-wide text-steam/40">
+              {"If you are not a student, just put your job.  Non-students are very welcome too :)"}
+            </p>
           </div>
           <div className="flex flex-col gap-2">
             <Label htmlFor="signup-project" className={labelClass}>

@@ -29,29 +29,34 @@ const PILLARS = [
 
 const FAQS = [
   {
+    q: "Why are we doing this?",
+    a: `See "Why?" section in the page header.`
+  },
+  {
     q: "Who is this for?",
-    a: "Builders, writers, founders — anyone with one meaningful project and no quiet stretch of time to finish it. You bring the work; we remove everything else.",
+    a: "You can be a designer, a creative, a programmer, a writer, all we ask is that you bring something interesting to work on.",
   },
   {
     q: "How long is the program?",
-    a: "One week, start to finish. You arrive on a Sunday evening and leave the following Sunday morning, with seven uninterrupted days in between.",
+    a: "One week, but plan for 8-9 days for travel buffer.",
   },
   {
     q: "Where does it take place?",
-    a: "A remote onsen town in the mountains of Japan. Hot springs, cedar forest, and not much else — the isolation is the point.",
+    a: "Location TBD, but it will be a small onsen town a few hours from Tokyo.",
   },
   {
-    q: "What's included?",
-    a: "Your room, all meals, and unlimited access to the baths. We handle every logistic so the only decision you make each day is what to work on.",
+    q: "When does it take place?",
+    a: "Oct 2026. Exact dates and details are still TBD based on the interest and budget we can secure.",
   },
   {
-    q: "What about Wi-Fi and phones?",
-    a: "There's reliable Wi-Fi for your project. We simply ask that screens go away after dark, and we make that easy to keep.",
+    q: "Can I join if I'm not a student?",
+    a: "Absolutely! We will prioritize subsidizing the cost for students, but non-students are welcome to join with their own trip expense.",
   },
   {
-    q: "How do I join?",
-    a: "We're opening soon with a small first cohort. Leave your email and you'll be the first to know when dates and pricing are announced.",
-  },
+    q: "Are you accepting sponsors?",
+    a: "Yes. We are looking for a few select sponsors to help cover the costs, so please email me if you align w/ our mission and are interested in getting massive marketing exposure.",
+    email: "hanyiming1995@gmail.com",
+  }
 ];
 
 export default function Home() {
@@ -83,9 +88,13 @@ export default function Home() {
         </span>
 
         <div className="relative z-20 flex h-full flex-col items-center justify-center px-6 text-center">
+          <p className="animate-in fade-in slide-in-from-bottom-5 mt-8 text-[0.7rem] font-light tracking-[0.45em] text-ember uppercase duration-1000">
+            Oct 2026
+          </p>
           <h1 className="animate-in fade-in slide-in-from-bottom-4 max-w-4xl text-5xl font-extralight leading-[1.1] tracking-tight text-steam duration-1000 sm:text-7xl md:text-[5.5rem]">
             <Balancer>An Experimental One Week Program</Balancer>
           </h1>
+
           <p className="animate-in fade-in slide-in-from-bottom-5 mt-10 max-w-xl text-base font-light leading-relaxed tracking-wide text-steam/70 duration-1000 sm:text-lg">
             <Balancer>
               Bring your project and lock in for one week at a remote onsen town
@@ -122,11 +131,11 @@ export default function Home() {
             Philosophy
           </p>
           <p className="text-2xl font-extralight leading-[1.5] tracking-tight text-steam/90 sm:text-3xl md:text-2xl">
-            We want to create a once-in-a-life experience for young creatives, technologists, and academics to explore their own interest free of distractions
+            We want to create a once-in-a-life experience for young creatives, technologists, and academics to explore their own interests free of distractions
           </p>
           <br />
           <p className="text-2xl font-extralight leading-[1.5] tracking-tight text-steam/90 sm:text-3xl md:text-2xl">
-            We want to create a once-in-a-life experience for young creatives, technologists, and academics to explore their own interest free of distractions
+            By bringing together curious minded individuals in a truly unique environment, we believe we can create a life changing experience that will alter the trajectory of people&apos;s lives
           </p>
 
         </div>
@@ -136,13 +145,8 @@ export default function Home() {
       <section className="border-t border-onsen/10 px-6 py-32">
         <div className="mx-auto grid max-w-6xl gap-16 md:grid-cols-[1fr_1.6fr]">
           <div className="md:sticky md:top-32 md:self-start">
-            <p className="mb-6 text-[0.7rem] font-light tracking-[0.45em] text-onsen uppercase">
-              Questions
-            </p>
             <h2 className="text-3xl font-extralight leading-[1.15] tracking-tight text-steam sm:text-4xl">
-              Before you
-              <br />
-              ask.
+              FAQ
             </h2>
           </div>
 
@@ -157,6 +161,17 @@ export default function Home() {
                 </dt>
                 <dd className="mt-3 text-sm font-light leading-relaxed text-steam/60 md:mt-0">
                   {faq.a}
+                  {faq.email && (
+                    <>
+                      {" "}
+                      <a
+                        href={`mailto:${faq.email}`}
+                        className="text-steam underline underline-offset-4 transition-colors hover:text-onsen"
+                      >
+                        {faq.email}
+                      </a>
+                    </>
+                  )}
                 </dd>
               </div>
             ))}
