@@ -27,16 +27,12 @@ export function SignupDialog({ children }: { children: React.ReactNode }) {
 
   const join = api.waitlist.join.useMutation({
     onSuccess: () => {
-      toast.success("You're on the list.", {
-        description: "We'll send you word when the doors open.",
-      });
       setName("");
       setEmail("");
       setHandle("");
       setSchool("");
       setProject("");
       setNotes("");
-      setOpen(false);
     },
     onError: () => {
       toast.error("Something went wrong. Please try again.");
@@ -49,9 +45,31 @@ export function SignupDialog({ children }: { children: React.ReactNode }) {
     "border-steam/15 bg-steam/[0.03] text-steam placeholder:text-steam/30 focus-visible:border-onsen/60 focus-visible:ring-onsen/20";
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog
+      open={open}
+      onOpenChange={(o) => {
+        if (o) join.reset();
+        setOpen(o);
+      }}
+    >
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="max-h-[90dvh] overflow-y-auto border-none bg-night text-steam ring-1 ring-onsen/15 sm:max-w-md">
+        {join.isSuccess ? (
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-extralight tracking-tight text-steam">
+              You&apos;re on the list.
+            </DialogTitle>
+            <DialogDescription className="font-light leading-relaxed text-steam/60">
+              We&apos;ve sent a confirmation email your way — please check your
+              inbox to confirm your spot.
+              <br />
+              <br />
+              Don&apos;t see it? Check your spam folder (and mark it &ldquo;not
+              spam&rdquo; so you don&apos;t miss what comes next).
+            </DialogDescription>
+          </DialogHeader>
+        ) : (
+          <>
         <DialogHeader>
           <DialogTitle className="text-2xl font-extralight tracking-tight text-steam">
             Sign up
@@ -158,6 +176,8 @@ export function SignupDialog({ children }: { children: React.ReactNode }) {
             {join.isPending ? "Signing up…" : "Sign Up"}
           </button>
         </form>
+          </>
+        )}
       </DialogContent>
     </Dialog>
   );

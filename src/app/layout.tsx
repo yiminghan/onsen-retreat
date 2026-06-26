@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: "Onsen Retreat — Stillness, Steam, Solitude",
   description:
     "Bring your project and lock in for one week at a remote onsen town with no distractions.",
-  icons: [{ rel: "icon", url: "/icon.svg", type: "image/svg+xml" }],
+  icons: [{ rel: "icon", url: "/icon.png", type: "image/png" }],
 };
 
 const geist = Geist({
