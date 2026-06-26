@@ -35,6 +35,7 @@ export const waitlist = createTable(
     school: d.varchar({ length: 256 }),
     project: d.text().notNull(),
     notes: d.text(),
+    onboardingEmailSent: d.boolean().default(false),
     createdAt: d
       .timestamp({ withTimezone: true })
       .$defaultFn(() => /* @__PURE__ */ new Date())
