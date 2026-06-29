@@ -24,6 +24,18 @@ export default function SponsorPage() {
             </a>{" "}
             for sponsorship inquiries.
           </p>
+          <p>
+            Want more info? Check out our{" "}
+            <a
+              href="https://www.figma.com/deck/ZgXaZpP5XeUyPVPNvhP1ep/Onsen-Retreat-Sponsor-Deck"
+              className="underline underline-offset-4 transition-opacity hover:opacity-60"
+              target="_blank" rel="noopener noreferrer"
+            >
+              Partner Prospectus
+            </a>
+            .
+
+          </p>
         </div>
       </main>
 

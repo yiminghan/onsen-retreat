@@ -51,7 +51,6 @@ export default async function Image() {
         }}
       >
         {/* Faint Beppu outline behind the wordmark (hero: 40vw, opacity 0.4) */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={dataUri(beppu)}
           alt=""
@@ -69,14 +68,12 @@ export default async function Image() {
             height: wordmarkH,
           }}
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={dataUri(wordmark)}
             alt="Onsen Retreat"
             width={wordmarkW}
             height={wordmarkH}
           />
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={dataUri(asterisk)}
             alt=""
