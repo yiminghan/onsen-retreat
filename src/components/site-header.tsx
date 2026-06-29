@@ -14,7 +14,6 @@ import {
 
 const NAV_LINKS = [
   { href: "/why", label: "About" },
-  { href: "/#experience", label: "Experience" },
   { href: "/brand", label: "Brand" },
   { href: "mailto:hanyiming1995@gmail.com", label: "Sponsor" },
 ];
@@ -23,10 +22,10 @@ export function SiteHeader() {
   return (
     <header className="absolute inset-x-0 top-0 z-30">
       <nav className="flex h-20 items-center justify-between px-6 sm:px-10">
-        {/* Left — asterisk brand mark (home) */}
+        {/* Left — asterisk brand mark (brand) */}
         <Link
           href="/"
-          aria-label="Onsen Retreat — home"
+          aria-label="Onsen Retreat — brand"
           className="transition-opacity hover:opacity-70"
         >
           <Image

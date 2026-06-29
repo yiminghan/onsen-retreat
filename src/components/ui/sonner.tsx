@@ -6,7 +6,7 @@ import { CircleCheckIcon, InfoIcon, TriangleAlertIcon, OctagonXIcon, Loader2Icon
 const Toaster = ({ ...props }: ToasterProps) => {
   return (
     <Sonner
-      theme="dark"
+      theme="light"
       className="toaster group"
       icons={{
         success: (
@@ -22,21 +22,21 @@ const Toaster = ({ ...props }: ToasterProps) => {
           <OctagonXIcon className="size-4 text-destructive" />
         ),
         loading: (
-          <Loader2Icon className="size-4 animate-spin text-steam/60" />
+          <Loader2Icon className="size-4 animate-spin text-ink/60" />
         ),
       }}
       style={
         {
-          "--normal-bg": "var(--color-night)",
-          "--normal-text": "var(--color-steam)",
+          "--normal-bg": "var(--color-sand)",
+          "--normal-text": "var(--color-ink)",
           "--normal-border": "color-mix(in oklch, var(--color-flame) 18%, transparent)",
           "--border-radius": "var(--radius)",
         } as React.CSSProperties
       }
       toastOptions={{
         classNames: {
-          title: "font-light tracking-tight text-steam",
-          description: "font-light text-steam/60",
+          title: "font-light tracking-tight text-ink",
+          description: "font-light text-ink/60",
         },
       }}
       {...props}

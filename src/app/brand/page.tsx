@@ -3,6 +3,7 @@ import Image from "next/image";
 
 import { SiteHeader } from "~/components/site-header";
 import { SiteFooter } from "~/components/site-footer";
+import { ColourSwatches } from "~/components/colour-swatches";
 
 export const metadata: Metadata = {
   title: "Brand — Onsen Retreat",
@@ -28,6 +29,18 @@ const MARKS: Mark[] = [
 
 ];
 
+type Video = {
+  src: string;
+  label: string;
+};
+
+const VIDEOS: Video[] = [
+  { src: "/videos/hero.MP4", label: "Hero" },
+  { src: "/videos/date.MP4", label: "Date" },
+  { src: "/videos/location.MP4", label: "Location" },
+  { src: "/videos/out_of_offic.MP4", label: "Out of Office" },
+];
+
 type Specimen = {
   name: string;
   role: string;
@@ -48,14 +61,6 @@ const FONTS: Specimen[] = [
     className: "font-inclusive",
     sample: "Retreat",
   },
-];
-
-type Swatch = { name: string; className: string; hex: string };
-
-const COLOURS: Swatch[] = [
-  { name: "Sand", className: "bg-sand", hex: "#EEEDE3" },
-  { name: "Ink", className: "bg-ink", hex: "#0F0F0F" },
-  { name: "Flame", className: "bg-flame", hex: "#FF7100" },
 ];
 
 function SectionHeading({ children }: { children: React.ReactNode }) {
@@ -105,10 +110,37 @@ export default function BrandPage() {
           </div>
         </section>
 
-        {/* Typography */}
+        {/* Videos */}
         <section className="relative mt-24">
+          <div className="mt-8 grid grid-cols-2 gap-px bg-ink/10 sm:grid-cols-3">
+            {VIDEOS.map((v) => (
+              <a
+                key={v.src}
+                href={v.src}
+                download
+                className="group relative flex aspect-square flex-col items-center justify-center gap-5 bg-sand p-8 transition hover:bg-ink/[0.03]"
+              >
+                <div className="relative flex flex-1 items-center justify-center">
+                  <video
+                    src={v.src}
+                    muted
+                    loop
+                    playsInline
+                    autoPlay
+                    className="max-h-32 w-auto max-w-full object-contain"
+                  />
+                </div>
+                <span className="font-inclusive text-[0.65rem] tracking-[0.2em] text-ink/55 uppercase">
+                  <span className="hidden group-hover:inline">Download ↓</span>
+                </span>
+              </a>
+            ))}
+          </div>
+        </section>
 
-          <div className="mt-8 grid gap-px bg-ink/10 sm:grid-cols-2">
+        {/* Typography */}
+        <section className="relative">
+          <div className="grid gap-px bg-ink/10 sm:grid-cols-2">
             {FONTS.map((f) => (
               <div key={f.name} className="flex flex-col gap-6 bg-sand p-8">
                 <p className={`${f.className} text-6xl leading-none text-ink`}>
@@ -130,25 +162,9 @@ export default function BrandPage() {
         </section>
 
         {/* Colour */}
-        <section className="relative mt-24">
+        <section className="relative">
 
-          <div className="mt-8 grid grid-cols-2 gap-px bg-ink/10 sm:grid-cols-3">
-            {COLOURS.map((c) => (
-              <div key={c.name} className="flex flex-col bg-sand">
-                <div
-                  className={`${c.className} aspect-square w-full border-b border-ink/10`}
-                />
-                <div className="flex flex-col px-4 py-3">
-                  <span className="font-inclusive text-sm font-bold text-ink">
-                    {c.name}
-                  </span>
-                  <span className="font-inclusive text-[0.7rem] tracking-wide text-ink/50 uppercase">
-                    {c.hex}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
+          <ColourSwatches />
         </section>
       </main>
     </div>

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import { SiteHeader } from "~/components/site-header";
 import { SiteFooter } from "~/components/site-footer";
@@ -18,7 +19,7 @@ const FAQS = [
   },
   {
     q: "Where does it take place?",
-    a: "Location TBD, but it will be a small onsen town a few hours from Tokyo.",
+    a: "Beppu, Japan.  It's a vibrant seaside city known as the country's onsen capital.",
   },
   {
     q: "When does it take place?",
@@ -61,6 +62,12 @@ export default function Home() {
               priority
               className="animate-in fade-in slide-in-from-bottom-4 h-auto w-[78vw] max-w-[800px] duration-1000"
             />
+            <Link
+              href="/signup"
+              className="group animate-in fade-in slide-in-from-bottom-3 mt-10 inline-flex items-center gap-2 font-inclusive text-lg font-bold tracking-wide text-ink uppercase underline underline-offset-8 decoration-1 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:decoration-2 hover:underline-offset-[10px] sm:text-xl"
+            >
+              Sign up
+            </Link>
           </div>
         </div>
 
