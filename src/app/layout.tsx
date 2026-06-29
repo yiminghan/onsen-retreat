@@ -5,12 +5,14 @@ import { Inclusive_Sans } from "next/font/google";
 import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/next"
 import { TRPCReactProvider } from "~/trpc/react";
+import { SpeedInsights } from "@vercel/speed-insights/next"
+
 import { Toaster } from "~/components/ui/sonner";
 
 export const metadata: Metadata = {
-  title: "Onsen Retreat — Stillness, Steam, Solitude",
+  title: "Onsen Retreat 2026",
   description:
-    "Bring your project and lock in for one week at a remote onsen town with no distractions.",
+    "An Experimental One Week Program",
   icons: [
     { rel: "icon", url: "/asterisk-favicon.png", type: "image/png" },
     { rel: "shortcut icon", url: "/favicon.ico" },
@@ -42,6 +44,7 @@ export default function RootLayout({
     >
       <body>
         <Analytics />
+        <SpeedInsights />
         <TRPCReactProvider>{children}</TRPCReactProvider>
         <Toaster />
       </body>

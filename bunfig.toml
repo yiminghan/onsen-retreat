@@ -1,0 +1,4 @@
+[install]
+# react-email cuts frequent releases; exclude it from the global
+# minimumReleaseAge supply-chain delay so installs don't get blocked.
+minimumReleaseAgeExcludes = ["react-email"]

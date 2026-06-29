@@ -1,7 +1,6 @@
 import Image from "next/image";
 
 import { Hero } from "~/components/hero";
-import { SiteFooter } from "~/components/site-footer";
 import { PreviousStack } from "~/components/previous-stack";
 import Link from "next/link";
 
@@ -102,7 +101,7 @@ export default function Home() {
           </div>
 
           {/* Photo deck */}
-          <div className="relative flex justify-center">
+          <div className="relative flex justify-center md:justify-start">
             <PreviousStack />
           </div>
         </div>
