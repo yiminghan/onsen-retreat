@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function SignupPage() {
   return (
-    <div className="relative min-h-screen bg-sand text-ink">
+    <div className="relative min-h-svh bg-sand text-ink">
       <SiteHeader />
 
       <main className="relative mx-auto max-w-xl px-6 pt-44 pb-28">

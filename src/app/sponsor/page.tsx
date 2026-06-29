@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function SponsorPage() {
   return (
-    <div className="relative min-h-screen bg-sand text-ink">
+    <div className="relative min-h-svh bg-sand text-ink">
       <SiteHeader />
 
       <main className="relative mx-auto flex min-h-dvh max-w-3xl items-center justify-center px-6">

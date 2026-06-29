@@ -96,7 +96,7 @@ export function Hero() {
       className={reduced ? "relative" : "relative h-[260vh]"}
     >
       {/* Pinned viewport */}
-      <div className="sticky top-0 flex h-screen min-h-screen w-full flex-col overflow-hidden bg-sand">
+      <div className="sticky top-0 flex h-svh min-h-svh w-full flex-col overflow-hidden bg-sand">
         <div style={{ opacity: textOpacity }}>
           <SiteHeader />
         </div>
