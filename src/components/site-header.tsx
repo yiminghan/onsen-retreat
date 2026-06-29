@@ -15,7 +15,7 @@ import {
 const NAV_LINKS = [
   { href: "/why", label: "About" },
   { href: "/brand", label: "Brand" },
-  { href: "mailto:hanyiming1995@gmail.com", label: "Sponsor" },
+  { href: "/sponsor", label: "Sponsor" },
 ];
 
 export function SiteHeader() {

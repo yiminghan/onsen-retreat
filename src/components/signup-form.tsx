@@ -31,9 +31,10 @@ export function SignupForm() {
   });
 
   const labelClass =
-    "text-[0.7rem] font-light tracking-[0.3em] text-ink/70 uppercase";
+    "text-[0.7rem] font-semibold tracking-[0.02em] text-ink/80 uppercase";
   const fieldClass =
-    "border-ink/15 bg-ink/[0.03] text-ink placeholder:text-ink/30 focus-visible:border-ink/60 focus-visible:ring-ink/20";
+    "rounded-none border-0 border-b border-ink/20 bg-transparent px-0 py-1 text-ink placeholder:text-ink/30 focus-visible:border-ink focus-visible:ring-0";
+  const textareaClass = `${fieldClass} min-h-10 resize-none`;
 
   if (join.isSuccess) {
     return (
@@ -123,7 +124,8 @@ export function SignupForm() {
             className={fieldClass}
           />
           <p className="text-md font-light tracking-wide text-ink/40">
-            {"If you are not a student, just put your job.  Non-students are very welcome too :)"}
+            Not a student? Just put your job — non-students are very welcome
+            too :)
           </p>
         </div>
         <div className="flex flex-col gap-2">
@@ -136,7 +138,7 @@ export function SignupForm() {
             placeholder="What are you going to be working on for the one week program?"
             value={project}
             onChange={(e) => setProject(e.target.value)}
-            className={fieldClass}
+            className={textareaClass}
           />
         </div>
         <div className="flex flex-col gap-2">
@@ -148,7 +150,7 @@ export function SignupForm() {
             placeholder="Optional"
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
-            className={fieldClass}
+            className={textareaClass}
           />
         </div>
         <button
