@@ -59,10 +59,13 @@ export function Hero() {
 
   // Animation progress finishes a touch before the track ends, holding a beat of
   // full black before the pin releases into the section below.
-  const ap = reduced ? 0 : clamp(progress / 0.9);
-  const scale = 1 + 119 * ap * ap; // ease-in: slow start, late burst
+  const ap = reduced ? 0 : clamp(progress / 0.95);
+  const scale = 1 + 39 * ap * ap; // ease-in: slow start, late burst (max ~220x)
   const textOpacity = Math.max(0, 1 - ap * 1.5);
-  const sealOpacity = clamp((ap - 0.82) / 0.18);
+  // The asterisk's star gaps mean it can't fill the viewport on its own, so the
+  // black seal fades in alongside the expansion to complete the wipe — reaching
+  // full black by ap ≈ 0.9, well before the asterisk plateaus.
+  const sealOpacity = clamp((ap - 0.5) / 0.4);
 
   return (
     <section
@@ -100,17 +103,18 @@ export function Hero() {
                 className="animate-in fade-in slide-in-from-bottom-4 h-auto w-full duration-1000"
               />
               {!reduced && (
-                // eslint-disable-next-line @next/next/no-img-element -- transform-animated SVG overlay; next/image's wrapper fights the scale animation
+                // eslint-disable-next-line @next/next/no-img-element -- size-animated SVG overlay; driving the rendered width (not CSS scale) keeps the vector crisp, and next/image's wrapper fights the animation
                 <img
                   src="/onsen-asterisk.svg"
                   alt=""
                   aria-hidden
                   style={{
-                    transform: `translate(-50%, -50%) scale(${scale})`,
+                    width: `calc(min(5vw, 52px) * ${scale})`,
+                    transform: "translate(-50%, -50%)",
                     transformOrigin: "center",
-                    willChange: "transform",
+                    willChange: "width",
                   }}
-                  className="pointer-events-none absolute top-[8%] left-[103%] z-20 w-[5vw] max-w-[52px] select-none"
+                  className="pointer-events-none absolute top-[8%] left-[103%] z-20 h-auto select-none"
                 />
               )}
             </div>
