@@ -1,8 +1,9 @@
 import Image from "next/image";
-import Link from "next/link";
 
-import { SiteHeader } from "~/components/site-header";
+import { Hero } from "~/components/hero";
 import { SiteFooter } from "~/components/site-footer";
+import { PreviousStack } from "~/components/previous-stack";
+import Link from "next/link";
 
 const FAQS = [
   {
@@ -40,71 +41,70 @@ export default function Home() {
   return (
     <div className="bg-sand text-ink">
       {/* ---------- Hero ---------- */}
-      <section className="relative flex min-h-screen w-full flex-col overflow-hidden bg-sand">
-        <SiteHeader />
-
-        <Image
-          src="/images/branding/beppu_outline.svg"
-          alt=""
-          width={181}
-          height={209}
-          aria-hidden
-          className="pointer-events-none absolute top-1/2 left-1/2 -z-0 h-auto w-[40vw] max-w-[420px] -translate-x-1/2 -translate-y-1/2 opacity-40 select-none"
-        />
-
-        <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-6 py-24">
-          <div className="flex w-full max-w-[1100px] flex-col items-center">
-            <Image
-              src="/onsen-wordmark.svg"
-              alt="Onsen Retreat"
-              width={801}
-              height={372}
-              priority
-              className="animate-in fade-in slide-in-from-bottom-4 h-auto w-[78vw] max-w-[800px] duration-1000"
-            />
-            <Link
-              href="/signup"
-              className="group animate-in fade-in slide-in-from-bottom-3 mt-10 inline-flex items-center gap-2 font-inclusive text-lg font-bold tracking-wide text-ink uppercase underline underline-offset-8 decoration-1 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:decoration-2 hover:underline-offset-[10px] sm:text-xl"
-            >
-              Sign up
-            </Link>
-          </div>
-        </div>
-
-        <div className="animate-in fade-in slide-in-from-bottom-5 pointer-events-none absolute inset-x-0 bottom-0 flex items-baseline justify-between px-6 pb-8 font-inclusive text-lg text-ink duration-1000 sm:px-10 sm:pb-10 sm:text-[32px]">
-          <p>
-            <span className="font-bold">Beppu</span> Japan
-          </p>
-          <p>
-            <span className="font-bold">2026</span> Oct
-          </p>
-        </div>
-      </section>
+      <Hero />
 
       {/* ---------- Philosophy ---------- */}
       <section
         id="experience"
-        className="relative scroll-mt-24 overflow-hidden border-t border-ink/10 px-6 py-40"
+        className="relative scroll-mt-24 overflow-hidden bg-ink px-6 py-40"
       >
-        {/* Oversized faint kanji anchor */}
-        <span
-          className="pointer-events-none absolute top-1/2 left-1/2 -z-0 -translate-x-1/2 -translate-y-1/2 text-[22rem] leading-none text-ink/[0.04] select-none"
+        {/* Oversized faint asterisk anchor */}
+        <Image
+          src="/onsen-asterisk.svg"
+          alt=""
+          width={32}
+          height={32}
           aria-hidden
-        >
-          和
-        </span>
+          style={{ filter: "invert(1)", opacity: 0.05 }}
+          className="pointer-events-none absolute top-1/2 left-1/2 z-0 h-auto w-[26rem] max-w-[60vw] -translate-x-1/2 -translate-y-1/2 select-none"
+        />
+
         <div className="relative mx-auto max-w-3xl text-center">
-          <p className="mb-8 text-[0.7rem] font-light tracking-[0.45em] text-ink uppercase">
+          <h2 className="mb-10 font-display text-3xl tracking-tight text-sand sm:text-4xl">
             Philosophy
-          </p>
-          <p className="text-2xl font-extralight leading-[1.5] tracking-tight text-ink/90 sm:text-3xl md:text-2xl">
+          </h2>
+          <p className="text-2xl font-extralight leading-[1.5] tracking-tight text-sand/90 sm:text-3xl md:text-2xl">
             We want to create a once-in-a-life experience for young creatives, technologists, and academics to explore their own interests free of distractions
           </p>
           <br />
-          <p className="text-2xl font-extralight leading-[1.5] tracking-tight text-ink/90 sm:text-3xl md:text-2xl">
+          <p className="text-2xl font-extralight leading-[1.5] tracking-tight text-sand/90 sm:text-3xl md:text-2xl">
             By bringing together curious minded individuals in a truly unique environment, we believe we can create a life changing experience that will alter the trajectory of people&apos;s lives
           </p>
 
+        </div>
+      </section>
+
+      {/* ---------- Why ---------- */}
+      <section
+        id="why"
+        className="relative scroll-mt-24 overflow-hidden border-t border-ink/10 px-6 py-40"
+      >
+        <div className="mx-auto grid max-w-6xl items-center gap-x-16 gap-y-14 md:grid-cols-2">
+          {/* Story */}
+          <div className="prose-onsen relative">
+            <h2 className="font-display text-3xl tracking-tight text-ink sm:text-4xl">
+              Why
+            </h2>
+            <div className="mt-8 space-y-6 text-lg font-light leading-relaxed tracking-wide text-ink/75">
+              <p>
+                Two years ago, through sheer randomness, I went on a one-week onsen retreat that changed my life.
+              </p>
+              <p>
+                We would build, hike, chill in the onsen, and talk about technology. It was my first taste of what a nomadic lifestyle could look like, and it completely changed my worldview.
+              </p>
+              <p>
+                This year, I want to organize a similar retreat during reading week so that students can experience the same transformation.
+              </p>
+              <p>
+                You can be a designer, a creative, a programmer, a writer, or even a marketer—just bring your project, and prepare to lock in for one week in a small Japanese onsen town.
+              </p>
+            </div>
+          </div>
+
+          {/* Photo deck */}
+          <div className="relative flex justify-center">
+            <PreviousStack />
+          </div>
         </div>
       </section>
 
@@ -144,9 +144,16 @@ export default function Home() {
             ))}
           </dl>
         </div>
+        <div className="relative flex flex-col items-center gap-6 text-center mt-20">
+          <Link
+            href="/signup"
+            className="border-b border-ink/40 pb-1 text-[0.8rem] font-light tracking-[0.3em] text-ink/80 uppercase transition-colors hover:border-ink hover:text-ink"
+          >
+            Sign Up
+          </Link>
+        </div>
       </section>
 
-      <SiteFooter />
     </div>
   );
 }

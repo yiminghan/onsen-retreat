@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
 
 import { Button } from "~/components/ui/button";
@@ -13,30 +14,37 @@ import {
 } from "~/components/ui/dropdown-menu";
 
 const NAV_LINKS = [
-  { href: "/why", label: "About" },
   { href: "/brand", label: "Brand" },
   { href: "/sponsor", label: "Sponsor" },
 ];
 
 export function SiteHeader() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+
   return (
     <header className="absolute inset-x-0 top-0 z-30">
       <nav className="flex h-20 items-center justify-between px-6 sm:px-10">
-        {/* Left — asterisk brand mark (brand) */}
-        <Link
-          href="/"
-          aria-label="Onsen Retreat — brand"
-          className="transition-opacity hover:opacity-70"
-        >
-          <Image
-            src="/onsen-asterisk.svg"
-            alt=""
-            width={32}
-            height={32}
-            priority
-            className="size-7 sm:size-8"
-          />
-        </Link>
+        {/* Left — asterisk brand mark (brand). Hidden on the home page, where
+            the hero already features the wordmark's asterisk. */}
+        {isHome ? (
+          <span aria-hidden />
+        ) : (
+          <Link
+            href="/"
+            aria-label="Onsen Retreat — brand"
+            className="transition-opacity hover:opacity-70"
+          >
+            <Image
+              src="/onsen-asterisk.svg"
+              alt=""
+              width={32}
+              height={32}
+              priority
+              className="size-7 sm:size-8"
+            />
+          </Link>
+        )}
 
         {/* Desktop nav */}
         <div className="hidden items-center gap-10 md:flex lg:gap-16">

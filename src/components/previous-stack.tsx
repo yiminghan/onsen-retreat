@@ -47,7 +47,7 @@ const photos: Photo[] = [
 
 export function PreviousStack() {
   return (
-    <figure className="not-prose relative mt-16 mb-4">
+    <figure className="not-prose relative">
 
       <div className="group relative mx-auto h-64 w-full max-w-xl sm:h-72">
         {photos.map((photo) => (

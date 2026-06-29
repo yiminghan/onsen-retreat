@@ -12,7 +12,7 @@ export default function SponsorPage() {
     <div className="relative min-h-screen bg-sand text-ink">
       <SiteHeader />
 
-      <main className="relative mx-auto flex min-h-screen max-w-3xl items-center justify-center px-6">
+      <main className="relative mx-auto flex min-h-dvh max-w-3xl items-center justify-center px-6">
         <div className="prose-onsen relative space-y-7 text-lg font-light leading-relaxed tracking-wide text-ink/75 text-center">
           <p>
             Please email{" "}
