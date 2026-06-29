@@ -90,13 +90,12 @@ export default function BrandPage() {
                 className={`group relative flex aspect-square flex-col items-center justify-center gap-5 p-8 transition bg-sand hover:bg-ink/[0.03]"
                   }`}
               >
-                <div className="relative flex flex-1 items-center justify-center">
+                <div className="relative w-full flex-1">
                   <Image
                     src={m.src}
                     alt={m.label}
-                    width={220}
-                    height={220}
-                    className="max-h-32 w-auto max-w-full object-contain"
+                    fill
+                    className="object-contain"
                   />
                 </div>
                 <span
