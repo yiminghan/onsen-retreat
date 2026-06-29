@@ -6,10 +6,6 @@ import Link from "next/link";
 
 const FAQS = [
   {
-    q: "Why are we doing this?",
-    a: `See "Why?" section in the page header.`
-  },
-  {
     q: "Who is this for?",
     a: "You can be a designer, a creative, a programmer, a writer, all we ask is that you bring something interesting to work on.",
   },
@@ -36,6 +32,24 @@ const FAQS = [
   }
 ];
 
+const PHASES = [
+  {
+    label: "Phase One",
+    when: "July - August",
+    body: "Various online competitions to select finalists to fly to Japan.",
+  },
+  {
+    label: "Phase Two",
+    when: "October",
+    body: "An immersive one week retreat in Beppu, Japan for 12 finalists to focus on their projects.",
+  },
+];
+
+const PROGRAM_DETAILS = [
+  { label: "When", value: "October 2026" },
+  { label: "Where", value: "Beppu, Japan" },
+];
+
 export default function Home() {
   return (
     <div className="bg-sand text-ink">
@@ -45,7 +59,7 @@ export default function Home() {
       {/* ---------- Philosophy ---------- */}
       <section
         id="experience"
-        className="relative scroll-mt-24 overflow-hidden bg-ink px-6 py-40"
+        className="relative flex min-h-dvh scroll-mt-24 flex-col justify-center overflow-hidden bg-ink px-6 py-40"
       >
         {/* Oversized faint asterisk anchor */}
         <Image
@@ -73,42 +87,83 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---------- Why ---------- */}
-      <section
-        id="why"
-        className="relative scroll-mt-24 overflow-hidden border-t border-ink/10 px-6 py-40"
-      >
-        <div className="mx-auto grid max-w-6xl items-center gap-x-16 gap-y-14 md:grid-cols-2">
-          {/* Story */}
-          <div className="prose-onsen relative">
-            <h2 className="font-display text-3xl tracking-tight text-ink sm:text-4xl">
-              Why
-            </h2>
-            <div className="mt-8 space-y-6 text-lg font-light leading-relaxed tracking-wide text-ink/75">
-              <p>
-                Two years ago, through sheer randomness, I went on a one-week onsen retreat that changed my life.
-              </p>
-              <p>
-                We would build, hike, chill in the onsen, and talk about technology. It was my first taste of what a nomadic lifestyle could look like, and it completely changed my worldview.
-              </p>
-              <p>
-                This year, I want to organize a similar retreat during reading week so that students can experience the same transformation.
-              </p>
-              <p>
-                You can be a designer, a creative, a programmer, a writer, or even a marketer—just bring your project, and prepare to lock in for one week in a small Japanese onsen town.
-              </p>
+      {/* ---------- Why (hidden for now) ---------- */}
+      {false && (
+        <section
+          id="why"
+          className="relative scroll-mt-24 overflow-hidden border-t border-ink/10 px-6 py-40"
+        >
+          <div className="mx-auto grid max-w-6xl items-center gap-x-16 gap-y-14 md:grid-cols-2">
+            {/* Story */}
+            <div className="prose-onsen relative">
+              <h2 className="font-display text-3xl tracking-tight text-ink sm:text-4xl">
+                Why
+              </h2>
+              <div className="mt-8 space-y-6 text-lg font-light leading-relaxed tracking-wide text-ink/75">
+                <p>
+                  Two years ago, through sheer randomness, I went on a one-week onsen retreat that changed my life.
+                </p>
+                <p>
+                  We would build, hike, chill in the onsen, and talk about technology. It was my first taste of what a nomadic lifestyle could look like, and it completely changed my worldview.
+                </p>
+                <p>
+                  This year, I want to organize a similar retreat during reading week so that students can experience the same transformation.
+                </p>
+                <p>
+                  You can be a designer, a creative, a programmer, a writer, or even a marketer—just bring your project, and prepare to lock in for one week in a small Japanese onsen town.
+                </p>
+              </div>
+            </div>
+
+            {/* Photo deck */}
+            <div className="relative flex justify-center md:justify-start">
+              <PreviousStack />
             </div>
           </div>
+        </section>
+      )}
 
-          {/* Photo deck */}
-          <div className="relative flex justify-center md:justify-start">
-            <PreviousStack />
+      {/* ---------- Program ---------- */}
+      <section
+        id="program"
+        className="relative flex min-h-dvh scroll-mt-24 flex-col justify-center overflow-hidden border-t border-ink/10 px-6 py-40"
+      >
+        <div className="mx-auto max-w-3xl">
+          <h2 className="font-display text-3xl tracking-tight text-ink sm:text-4xl">
+            Program
+          </h2>
+
+          {/* Phase blocks */}
+          <div className="mt-12 space-y-10">
+            {PHASES.map((phase) => (
+              <div key={phase.label}>
+                <p className="text-sm font-medium tracking-[0.15em] uppercase">
+                  <span className="text-flame">{phase.label}</span>
+                  <span className="text-ink/60"> · {phase.when}</span>
+                </p>
+                <p className="mt-3 text-2xl font-light leading-snug tracking-tight text-ink">
+                  {phase.body}
+                </p>
+              </div>
+            ))}
           </div>
+
+          {/* When / Where / Who */}
+          <dl className="mt-14 space-y-3">
+            {PROGRAM_DETAILS.map((detail) => (
+              <div key={detail.label} className="flex gap-2 text-lg">
+                <dt className="font-medium text-flame">{detail.label}</dt>
+                <dd className="text-ink/80">
+                  <span className="text-ink/40">·</span> {detail.value}
+                </dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </section>
 
       {/* ---------- FAQ ---------- */}
-      <section className="border-t border-ink/10 px-6 py-32">
+      <section className="flex min-h-dvh flex-col justify-center border-t border-ink/10 px-6 py-32">
         <div className="mx-auto grid max-w-6xl gap-16 md:grid-cols-[1fr_1.6fr]">
           <div className="md:sticky md:top-32 md:self-start">
             <h2 className="font-display text-3xl leading-[1.15] tracking-tight text-ink sm:text-4xl">

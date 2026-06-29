@@ -25,7 +25,9 @@ const MARKS: Mark[] = [
   { src: "/images/branding/onsen_text.svg", label: "Onsen Text" },
   { src: "/onsen-wordmark.svg", label: "Wordmark" },
   { src: "/onsen-retreat.svg", label: "Onsen Retreat" },
-
+  { src: "/images/branding/map.svg", label: "Map" },
+  { src: "/images/branding/map_label.svg", label: "Map — Labelled" },
+  { src: "/images/branding/timeline.svg", label: "Timeline" },
 ];
 
 type Video = {
