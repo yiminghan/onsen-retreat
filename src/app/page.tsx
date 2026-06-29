@@ -1,31 +1,7 @@
-import Balancer from "react-wrap-balancer";
+import Image from "next/image";
 
 import { SiteHeader } from "~/components/site-header";
 import { SiteFooter } from "~/components/site-footer";
-import { SignupDialog } from "~/components/signup-dialog";
-
-// Stock onsen-mood footage (serene forest waterfall). Swap with your own clip
-// by dropping a file in /public and pointing this at it.
-const HERO_VIDEO = "/onsen-poster.mp4"
-// "https://videos.pexels.com/video-files/6981411/6981411-hd_1920_1080_25fps.mp4";
-
-const PILLARS = [
-  {
-    kanji: "湯",
-    label: "The Springs",
-    body: "Mineral water drawn from deep volcanic sources, held at the exact temperature the body forgets itself in.",
-  },
-  {
-    kanji: "霧",
-    label: "The Steam",
-    body: "Mist that hangs in the morning air and softens every edge — the world dissolved to warmth and sound.",
-  },
-  {
-    kanji: "静",
-    label: "The Silence",
-    body: "No screens, no schedules. Only the long, deliberate quiet between the sounds of falling water.",
-  },
-];
 
 const FAQS = [
   {
@@ -61,80 +37,64 @@ const FAQS = [
 
 export default function Home() {
   return (
-    <div className="bg-night text-steam">
+    <div className="bg-sand text-ink">
       {/* ---------- Hero ---------- */}
-      <section className="relative h-screen w-full overflow-hidden">
-        <video
-          className="absolute inset-0 h-full w-full object-cover"
-          src={HERO_VIDEO}
-          poster="/onsen-poster.jpg"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/80" />
-        <div className="absolute inset-0 bg-night/20" />
+      <section className="relative flex min-h-screen w-full flex-col overflow-hidden bg-sand">
+        <SiteHeader />
 
-        <SiteHeader variant="overlay" />
-
-        {/* Vertical kanji accent — an Izanami signature */}
-        <span
-          className="absolute top-1/2 left-8 z-20 hidden -translate-y-1/2 text-sm tracking-[0.5em] text-steam/40 [writing-mode:vertical-rl] lg:block"
+        <Image
+          src="/images/branding/beppu_outline.svg"
+          alt=""
+          width={181}
+          height={209}
           aria-hidden
-        >
-          温泉 · 静寂
-        </span>
+          className="pointer-events-none absolute top-1/2 left-1/2 -z-0 h-auto w-[40vw] max-w-[420px] -translate-x-1/2 -translate-y-1/2 opacity-40 select-none"
+        />
 
-        <div className="relative z-20 flex h-full flex-col items-center justify-center px-6 text-center">
-          <p className="animate-in fade-in slide-in-from-bottom-5 mt-8 text-[0.7rem] font-light tracking-[0.45em] text-ember uppercase duration-1000">
-            Oct 2026
-          </p>
-          <h1 className="animate-in fade-in slide-in-from-bottom-4 max-w-4xl text-5xl font-extralight leading-[1.1] tracking-tight text-steam duration-1000 sm:text-7xl md:text-[5.5rem]">
-            <Balancer>An Experimental One Week Program</Balancer>
-          </h1>
-
-          <p className="animate-in fade-in slide-in-from-bottom-5 mt-10 max-w-xl text-base font-light leading-relaxed tracking-wide text-steam/70 duration-1000 sm:text-lg">
-            <Balancer>
-              Bring your project and lock in for one week at a remote onsen town
-              with no distractions.
-            </Balancer>
-          </p>
-          <div className="animate-in fade-in slide-in-from-bottom-6 mt-12 duration-1000">
-            <SignupDialog>
-              <button className="border-b border-ember pb-1 text-[0.8rem] font-light tracking-[0.3em] text-ember uppercase transition-colors hover:text-steam">
-                Sign Up
-              </button>
-            </SignupDialog>
+        <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-6 py-24">
+          <div className="flex w-full max-w-[1100px] flex-col items-center">
+            <Image
+              src="/onsen-wordmark.svg"
+              alt="Onsen Retreat"
+              width={801}
+              height={372}
+              priority
+              className="animate-in fade-in slide-in-from-bottom-4 h-auto w-[78vw] max-w-[800px] duration-1000"
+            />
           </div>
         </div>
 
-        <div className="absolute inset-x-0 bottom-8 z-20 flex justify-center">
-          <span className="text-[0.7rem] tracking-[0.35em] text-steam/50 uppercase">
-            Scroll
-          </span>
+        <div className="animate-in fade-in slide-in-from-bottom-5 pointer-events-none absolute inset-x-0 bottom-0 flex items-baseline justify-between px-6 pb-8 font-inclusive text-lg text-ink duration-1000 sm:px-10 sm:pb-10 sm:text-[32px]">
+          <p>
+            <span className="font-bold">Beppu</span> Japan
+          </p>
+          <p>
+            <span className="font-bold">2026</span> Oct
+          </p>
         </div>
       </section>
 
       {/* ---------- Philosophy ---------- */}
-      <section className="relative overflow-hidden border-t border-onsen/10 px-6 py-40">
+      <section
+        id="experience"
+        className="relative scroll-mt-24 overflow-hidden border-t border-ink/10 px-6 py-40"
+      >
         {/* Oversized faint kanji anchor */}
         <span
-          className="pointer-events-none absolute top-1/2 left-1/2 -z-0 -translate-x-1/2 -translate-y-1/2 text-[22rem] leading-none text-steam/[0.03] select-none"
+          className="pointer-events-none absolute top-1/2 left-1/2 -z-0 -translate-x-1/2 -translate-y-1/2 text-[22rem] leading-none text-ink/[0.04] select-none"
           aria-hidden
         >
           和
         </span>
         <div className="relative mx-auto max-w-3xl text-center">
-          <p className="mb-8 text-[0.7rem] font-light tracking-[0.45em] text-onsen uppercase">
+          <p className="mb-8 text-[0.7rem] font-light tracking-[0.45em] text-ink uppercase">
             Philosophy
           </p>
-          <p className="text-2xl font-extralight leading-[1.5] tracking-tight text-steam/90 sm:text-3xl md:text-2xl">
+          <p className="text-2xl font-extralight leading-[1.5] tracking-tight text-ink/90 sm:text-3xl md:text-2xl">
             We want to create a once-in-a-life experience for young creatives, technologists, and academics to explore their own interests free of distractions
           </p>
           <br />
-          <p className="text-2xl font-extralight leading-[1.5] tracking-tight text-steam/90 sm:text-3xl md:text-2xl">
+          <p className="text-2xl font-extralight leading-[1.5] tracking-tight text-ink/90 sm:text-3xl md:text-2xl">
             By bringing together curious minded individuals in a truly unique environment, we believe we can create a life changing experience that will alter the trajectory of people&apos;s lives
           </p>
 
@@ -142,31 +102,31 @@ export default function Home() {
       </section>
 
       {/* ---------- FAQ ---------- */}
-      <section className="border-t border-onsen/10 px-6 py-32">
+      <section className="border-t border-ink/10 px-6 py-32">
         <div className="mx-auto grid max-w-6xl gap-16 md:grid-cols-[1fr_1.6fr]">
           <div className="md:sticky md:top-32 md:self-start">
-            <h2 className="text-3xl font-extralight leading-[1.15] tracking-tight text-steam sm:text-4xl">
+            <h2 className="font-display text-3xl leading-[1.15] tracking-tight text-ink sm:text-4xl">
               FAQ
             </h2>
           </div>
 
-          <dl className="border-t border-onsen/10">
+          <dl className="border-t border-ink/10">
             {FAQS.map((faq) => (
               <div
                 key={faq.q}
-                className="border-b border-onsen/10 py-8 md:grid md:grid-cols-[1fr_1.4fr] md:gap-10"
+                className="border-b border-ink/10 py-8 md:grid md:grid-cols-[1fr_1.4fr] md:gap-10"
               >
-                <dt className="text-base font-light tracking-wide text-steam">
+                <dt className="text-base font-light tracking-wide text-ink">
                   {faq.q}
                 </dt>
-                <dd className="mt-3 text-sm font-light leading-relaxed text-steam/60 md:mt-0">
+                <dd className="mt-3 text-sm font-light leading-relaxed text-ink/60 md:mt-0">
                   {faq.a}
                   {faq.email && (
                     <>
                       {" "}
                       <a
                         href={`mailto:${faq.email}`}
-                        className="text-steam underline underline-offset-4 transition-colors hover:text-onsen"
+                        className="text-ink/70 underline underline-offset-4 transition-colors hover:text-ink"
                       >
                         {faq.email}
                       </a>

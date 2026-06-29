@@ -10,16 +10,16 @@ const Toaster = ({ ...props }: ToasterProps) => {
       className="toaster group"
       icons={{
         success: (
-          <CircleCheckIcon className="size-4 text-onsen" />
+          <CircleCheckIcon className="size-4 text-flame" />
         ),
         info: (
-          <InfoIcon className="size-4 text-onsen" />
+          <InfoIcon className="size-4 text-flame" />
         ),
         warning: (
-          <TriangleAlertIcon className="size-4 text-onsen" />
+          <TriangleAlertIcon className="size-4 text-flame" />
         ),
         error: (
-          <OctagonXIcon className="size-4 text-ember" />
+          <OctagonXIcon className="size-4 text-destructive" />
         ),
         loading: (
           <Loader2Icon className="size-4 animate-spin text-steam/60" />
@@ -29,7 +29,7 @@ const Toaster = ({ ...props }: ToasterProps) => {
         {
           "--normal-bg": "var(--color-night)",
           "--normal-text": "var(--color-steam)",
-          "--normal-border": "color-mix(in oklch, var(--color-onsen) 18%, transparent)",
+          "--normal-border": "color-mix(in oklch, var(--color-flame) 18%, transparent)",
           "--border-radius": "var(--radius)",
         } as React.CSSProperties
       }

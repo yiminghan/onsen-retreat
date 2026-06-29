@@ -42,7 +42,7 @@ export function SignupDialog({ children }: { children: React.ReactNode }) {
   const labelClass =
     "text-[0.7rem] font-light tracking-[0.3em] text-steam/70 uppercase";
   const fieldClass =
-    "border-steam/15 bg-steam/[0.03] text-steam placeholder:text-steam/30 focus-visible:border-onsen/60 focus-visible:ring-onsen/20";
+    "border-steam/15 bg-steam/[0.03] text-steam placeholder:text-steam/30 focus-visible:border-steam/60 focus-visible:ring-steam/20";
 
   return (
     <Dialog
@@ -53,10 +53,10 @@ export function SignupDialog({ children }: { children: React.ReactNode }) {
       }}
     >
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="max-h-[90dvh] overflow-y-auto border-none bg-night text-steam ring-1 ring-onsen/15 sm:max-w-md">
+      <DialogContent className="max-h-[90dvh] overflow-y-auto border-none bg-night text-steam ring-1 ring-steam/15 sm:max-w-md">
         {join.isSuccess ? (
           <DialogHeader>
-            <DialogTitle className="text-2xl font-extralight tracking-tight text-steam">
+            <DialogTitle className="font-display text-2xl tracking-tight text-steam">
               You&apos;re on the list.
             </DialogTitle>
             <DialogDescription className="font-light leading-relaxed text-steam/60">
@@ -71,7 +71,7 @@ export function SignupDialog({ children }: { children: React.ReactNode }) {
         ) : (
           <>
         <DialogHeader>
-          <DialogTitle className="text-2xl font-extralight tracking-tight text-steam">
+          <DialogTitle className="font-display text-2xl tracking-tight text-steam">
             Sign up
           </DialogTitle>
           <DialogDescription className="font-light leading-relaxed text-steam/60">
@@ -171,7 +171,7 @@ export function SignupDialog({ children }: { children: React.ReactNode }) {
           <button
             type="submit"
             disabled={join.isPending}
-            className="mt-4 self-center border-b border-ember pb-1 text-[0.8rem] font-light tracking-[0.3em] text-ember uppercase transition-colors hover:text-steam disabled:opacity-50 disabled:hover:text-ember"
+            className="mt-4 self-center border-b border-steam/40 pb-1 text-[0.8rem] font-light tracking-[0.3em] text-steam/80 uppercase transition-colors hover:border-steam hover:text-steam disabled:opacity-50"
           >
             {join.isPending ? "Signing up…" : "Sign Up"}
           </button>

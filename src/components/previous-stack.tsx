@@ -53,7 +53,7 @@ export function PreviousStack() {
         {photos.map((photo) => (
           <div
             key={photo.src}
-            className={`absolute inset-0 m-auto h-44 w-32 overflow-hidden rounded-xl shadow-2xl shadow-black/40 ring-1 ring-onsen/15 transition-transform duration-500 ease-out will-change-transform sm:h-52 sm:w-40 ${photo.z} ${photo.rest} ${photo.spread} hover:z-50 hover:-translate-y-4 hover:scale-105`}
+            className={`absolute inset-0 m-auto h-44 w-32 overflow-hidden rounded-xl shadow-2xl shadow-black/40 ring-1 ring-ink/10 transition-transform duration-500 ease-out will-change-transform sm:h-52 sm:w-40 ${photo.z} ${photo.rest} ${photo.spread} hover:z-50 hover:-translate-y-4 hover:scale-105`}
           >
             <Image
               src={photo.src}

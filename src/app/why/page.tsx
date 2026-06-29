@@ -12,26 +12,26 @@ export const metadata: Metadata = {
 
 export default function WhyPage() {
   return (
-    <div className="relative min-h-screen bg-night text-steam">
-      <SiteHeader variant="solid" />
+    <div className="relative min-h-screen bg-sand text-ink">
+      <SiteHeader />
 
       <main className="relative mx-auto max-w-3xl px-6 pt-44 pb-28">
         <span
-          className="pointer-events-none absolute top-28 right-0 -z-0 text-[16rem] leading-none text-steam/[0.03] select-none"
+          className="pointer-events-none absolute top-28 right-0 -z-0 text-[16rem] leading-none text-ink/[0.04] select-none"
           aria-hidden
         >
           湯
         </span>
 
 
-        <header className="relative mt-16 border-b border-onsen/15 pb-12 text-center">
-          <p className="text-[0.7rem] font-light tracking-[0.45em] text-onsen uppercase">
+        <header className="relative mt-16 border-b border-ink/15 pb-12 text-center">
+          <p className="text-[0.7rem] font-light tracking-[0.45em] text-ink uppercase">
             Why
           </p>
         </header>
         <PreviousStack />
 
-        <div className="prose-onsen relative mt-14 space-y-7 text-lg font-light leading-relaxed tracking-wide text-steam/75">
+        <div className="prose-onsen relative mt-14 space-y-7 text-lg font-light leading-relaxed tracking-wide text-ink/75">
           <p>
             Two years ago, through sheer randomness, I went on a one-week onsen retreat that changed my life.
           </p>
