@@ -43,7 +43,7 @@ export function VideoContestGuide() {
         <br />
         <br />
         We&apos;ll select <span className="font-medium text-ink">2–3 winners</span>{" "}
-        based on these criterias:
+        based on these criteria:
       </p>
       <ul className="list-disc space-y-2 pl-5">
         <li>
