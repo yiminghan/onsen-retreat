@@ -10,7 +10,7 @@ const resend = new Resend(env.RESEND_KEY);
  * Default sender. Until a custom domain is verified in Resend, use the shared
  * `onboarding@resend.dev` address which works out of the box for testing.
  */
-const DEFAULT_FROM = "YiMing <hi@onsen-retreat.com>";
+const DEFAULT_FROM = "Onsen Retreat <hi@onsen-retreat.com>";
 
 type SendEmailArgs = {
   to: string | string[];

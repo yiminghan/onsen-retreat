@@ -12,7 +12,8 @@ export function VisaGuide() {
         </ProseLink>
       </p>
       <p>
-        <span className="font-medium text-ink underline">Non-exempt nationals:</span>{" "}
+        <span className="font-medium text-ink underline">Non-exempt nationals:</span>
+        <br />
         You&apos;ll need a short-term &ldquo;Temporary Visitor&rdquo; visa and you will be responsible for securing the visa.
         We will announce winners by early Aug so you should have 2 months to get your visa.
         We will also try our best to help you in the process.
@@ -23,12 +24,6 @@ export function VisaGuide() {
         <li>
           A passport valid for at least 6 months beyond your travel dates.
         </li>
-        <li>
-          Accommodation details and a rough itinerary (we&apos;ll provide
-          retreat confirmation you can show).
-        </li>
-        <li>A return or onward ticket within your permitted stay. (we&apos;ll provide) </li>
-        <li>Proof of sufficient funds for your stay (occasionally requested).</li>
       </ul>
     </div>
   );

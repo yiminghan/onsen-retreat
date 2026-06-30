@@ -1,4 +1,5 @@
 // import { emailRouter } from "~/server/api/routers/email";
+import { videoSubmissionRouter } from "~/server/api/routers/video-submission";
 import { waitlistRouter } from "~/server/api/routers/waitlist";
 import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
 
@@ -9,6 +10,7 @@ import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
  */
 export const appRouter = createTRPCRouter({
   waitlist: waitlistRouter,
+  videoSubmission: videoSubmissionRouter,
   // email: emailRouter,
 });
 

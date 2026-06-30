@@ -43,3 +43,22 @@ export const waitlist = createTable(
   }),
   (t) => [uniqueIndex("waitlist_email_idx").on(t.email)],
 );
+
+export const videoSubmissions = createTable(
+  "video_submission",
+  (d) => ({
+    id: d.integer().primaryKey().generatedByDefaultAsIdentity(),
+    // Normalized IG handle (lowercased, no leading "@") — one entry per person.
+    handle: d.varchar({ length: 256 }).notNull(),
+    email: d.varchar({ length: 320 }).notNull(),
+    submissionLink: d.text().notNull(),
+    name: d.varchar({ length: 256 }),
+    notes: d.text(),
+    confirmationEmailSent: d.boolean().default(false),
+    createdAt: d
+      .timestamp({ withTimezone: true })
+      .$defaultFn(() => /* @__PURE__ */ new Date())
+      .notNull(),
+  }),
+  (t) => [uniqueIndex("video_submission_handle_idx").on(t.handle)],
+);

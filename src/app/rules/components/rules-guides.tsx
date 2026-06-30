@@ -1,7 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { Fragment, useEffect, useState } from "react";
+import { ChevronDownIcon } from "lucide-react";
 
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "~/components/ui/dropdown-menu";
 import { VideoContestGuide } from "./video-contest";
 import { HackathonGuide } from "./hackathon";
 import { ArtDesignContestGuide } from "./art-design-contest";
@@ -58,19 +68,75 @@ const GROUPS: GuideGroup[] = [
 ];
 
 const ALL_GUIDES = GROUPS.flatMap((group) => group.guides);
+const VALID_IDS = new Set(ALL_GUIDES.map((guide) => guide.id));
 
 export function RulesGuides() {
   const [active, setActive] = useState<Guide["id"]>(ALL_GUIDES[0]!.id);
-  const ActiveGuide =
-    ALL_GUIDES.find((guide) => guide.id === active)?.Component ??
-    ALL_GUIDES[0]!.Component;
+
+  // Deep-link support: open the guide named in the URL hash (e.g.
+  // /rules#video-contest), and keep responding to in-page hash changes.
+  useEffect(() => {
+    const applyHash = () => {
+      const id = window.location.hash.replace(/^#/, "");
+      if (VALID_IDS.has(id)) setActive(id);
+    };
+    applyHash();
+    window.addEventListener("hashchange", applyHash);
+    return () => window.removeEventListener("hashchange", applyHash);
+  }, []);
+
+  const selectGuide = (id: Guide["id"]) => {
+    setActive(id);
+    // Reflect the active guide in the URL so it's shareable, without the jump
+    // a plain hash navigation would cause.
+    window.history.replaceState(null, "", `#${id}`);
+  };
+
+  const activeGuide =
+    ALL_GUIDES.find((guide) => guide.id === active) ?? ALL_GUIDES[0]!;
+  const ActiveGuide = activeGuide.Component;
 
   return (
     <div className="mt-16 lg:grid lg:grid-cols-[220px_1fr] lg:gap-16">
-      {/* Grouped tab list — vertical on desktop, horizontal scroll on mobile */}
+      {/* Mobile: a single dropdown keeps every guide reachable in one tap
+          instead of a cramped, easy-to-miss horizontal scroll strip. */}
+      <div className="mb-10 lg:hidden">
+        <DropdownMenu>
+          <DropdownMenuTrigger className="group flex w-full items-center justify-between border-b border-ink/20 py-3 font-inclusive text-sm font-bold tracking-wide text-ink uppercase outline-none data-[state=open]:border-ink">
+            <span>{activeGuide.label}</span>
+            <ChevronDownIcon className="size-4 text-ink/50 transition-transform duration-200 group-data-[state=open]:rotate-180" />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent
+            align="start"
+            className="bg-sand text-ink ring-ink/10"
+          >
+            <DropdownMenuRadioGroup value={active} onValueChange={selectGuide}>
+              {GROUPS.map((group, i) => (
+                <Fragment key={group.label}>
+                  {i > 0 && <DropdownMenuSeparator className="bg-ink/10" />}
+                  <DropdownMenuLabel className="font-inclusive text-[0.65rem] font-bold tracking-[0.2em] text-ink/40 uppercase">
+                    {group.label}
+                  </DropdownMenuLabel>
+                  {group.guides.map((guide) => (
+                    <DropdownMenuRadioItem
+                      key={guide.id}
+                      value={guide.id}
+                      className="font-inclusive text-sm font-bold tracking-wide text-ink/70 uppercase focus:bg-ink/5 focus:text-ink data-[state=checked]:text-flame"
+                    >
+                      {guide.label}
+                    </DropdownMenuRadioItem>
+                  ))}
+                </Fragment>
+              ))}
+            </DropdownMenuRadioGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+
+      {/* Desktop: grouped vertical sidebar */}
       <nav
         aria-label="Rules guides"
-        className="-mx-6 mb-10 flex gap-8 overflow-x-auto border-b border-ink/10 px-6 pb-4 lg:sticky lg:top-28 lg:mx-0 lg:mb-0 lg:flex-col lg:gap-8 lg:self-start lg:overflow-visible lg:border-none lg:px-0 lg:pb-0"
+        className="hidden lg:sticky lg:top-28 lg:flex lg:flex-col lg:gap-8 lg:self-start"
       >
         {GROUPS.map((group) => (
           <div
@@ -87,7 +153,7 @@ export function RulesGuides() {
                   <button
                     key={guide.id}
                     type="button"
-                    onClick={() => setActive(guide.id)}
+                    onClick={() => selectGuide(guide.id)}
                     aria-current={isActive ? "true" : undefined}
                     className={`shrink-0 text-left font-inclusive text-sm font-bold tracking-wide uppercase transition-colors ${isActive ? "text-flame" : "text-ink/55 hover:text-ink"
                       }`}
