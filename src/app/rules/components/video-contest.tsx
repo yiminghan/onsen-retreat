@@ -71,7 +71,8 @@ export function VideoContestGuide() {
       <SubHeading>Can we participate in the hackathon/creative events too if we posted a video?</SubHeading>
       <p>
         A: Yes!  The winners will be announced before the other events start.
-        {" And we welcome everyone even if you just want to join for fun :)"}
+        <br />
+        {"And we welcome everyone even if you just want to join for fun :)"}
       </p>
     </div>
   );

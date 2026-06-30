@@ -1,15 +1,4 @@
-const PHASES = [
-  {
-    label: "Phase One",
-    when: "July - August",
-    body: "Various online competitions to select finalists to fly to Japan.",
-  },
-  {
-    label: "Phase Two",
-    when: "October",
-    body: "An immersive one week retreat in Beppu, Japan for 12 finalists to focus on their projects.",
-  },
-];
+import Link from "next/link";
 
 const PROGRAM_DETAILS = [
   { label: "When", value: "October 2026" },
@@ -29,17 +18,60 @@ export function Program() {
 
         {/* Phase blocks */}
         <div className="mt-12 space-y-10">
-          {PHASES.map((phase) => (
-            <div key={phase.label}>
-              <p className="text-sm font-medium tracking-[0.15em] uppercase">
-                <span className="text-flame">{phase.label}</span>
-                <span className="text-ink/60"> · {phase.when}</span>
-              </p>
-              <p className="mt-3 text-2xl font-light leading-snug tracking-tight text-ink">
-                {phase.body}
-              </p>
-            </div>
-          ))}
+          <div>
+            <p className="text-sm font-medium tracking-[0.15em] uppercase">
+              <span className="text-flame">Phase One</span>
+              <span className="text-ink/60"> · July - August</span>
+            </p>
+            <ul className="mt-3 space-y-1">
+              <li className="flex items-baseline gap-2">
+                <Link
+                  href="/rules#video-contest"
+                  className="text-2xl font-light leading-snug tracking-tight text-ink underline-offset-4 transition-colors hover:text-flame hover:underline"
+                >
+                  Video Contest
+                </Link>
+                <span className="text-ink">(2-3 Winners)</span>
+                <span className="ml-auto text-xs font-medium tracking-[0.15em] text-flame uppercase">
+                  Ongoing
+                </span>
+              </li>
+              <li className="flex items-baseline gap-2">
+                <Link
+                  href="/rules#hackathon"
+                  className="text-2xl font-light leading-snug tracking-tight text-ink underline-offset-4 transition-colors hover:text-flame hover:underline"
+                >
+                  Hackathon
+                </Link>
+
+                <span className="ml-auto text-xs font-medium tracking-[0.15em] text-ink/40 uppercase">
+                  Coming Soon
+                </span>
+              </li>
+              <li className="flex items-baseline gap-2">
+                <Link
+                  href="/rules#art-design-contest"
+                  className="text-2xl font-light leading-snug tracking-tight text-ink underline-offset-4 transition-colors hover:text-flame hover:underline"
+                >
+                  Art / Design Contest
+                </Link>
+                <span className="ml-auto text-xs font-medium tracking-[0.15em] text-ink/40 uppercase">
+                  Coming Soon
+                </span>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <p className="text-sm font-medium tracking-[0.15em] uppercase">
+              <span className="text-flame">Phase Two</span>
+              <span className="text-ink/60"> · October</span>
+            </p>
+            <p className="mt-3 text-2xl font-light leading-snug tracking-tight text-ink">
+              An immersive one week retreat in Beppu, Japan for 12 finalists to
+              focus on their projects.
+            </p>
+          </div>
         </div>
 
         {/* When / Where */}
