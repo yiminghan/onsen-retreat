@@ -82,7 +82,11 @@ export function VideoContestGuide() {
         {"And we welcome everyone even if you just want to join for fun :)"}
       </p>
 
+      <SubHeading>Do you have to make a video to get a chance for the retreat?</SubHeading>
+      <p>
+        You do not need to make a video if you plan to join the other contests!
+      </p>
 
-    </div>
+    </div >
   );
 }
