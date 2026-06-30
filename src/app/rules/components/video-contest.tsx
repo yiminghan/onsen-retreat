@@ -67,6 +67,13 @@ export function VideoContestGuide() {
         </p>
       </ul>
 
+      <SubHeading>What should the video be about?</SubHeading>
+      <p>
+        A: Please focus on who you are and what kind of projects you want to be doing at the onsen!
+        <br />
+        We would love to get to know you!
+      </p>
+
 
       <SubHeading>Can we participate in the hackathon/creative events too if we posted a video?</SubHeading>
       <p>
@@ -74,6 +81,8 @@ export function VideoContestGuide() {
         <br />
         {"And we welcome everyone even if you just want to join for fun :)"}
       </p>
+
+
     </div>
   );
 }
