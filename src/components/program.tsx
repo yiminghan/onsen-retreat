@@ -43,6 +43,7 @@ export function Program() {
                 >
                   Hackathon
                 </Link>
+                <span className="text-ink">(3-4 Winners)</span>
 
                 <span className="ml-auto text-xs font-medium tracking-[0.15em] text-ink/40 uppercase">
                   Coming Soon
@@ -55,6 +56,18 @@ export function Program() {
                 >
                   Art / Design Contest
                 </Link>
+                <span className="text-ink">(3-4 Winners)</span>
+                <span className="ml-auto text-xs font-medium tracking-[0.15em] text-ink/40 uppercase">
+                  Coming Soon
+                </span>
+              </li>
+              <li className="flex items-baseline gap-2">
+                <span
+                  className="text-2xl font-light leading-snug tracking-tight text-ink underline-offset-4 transition-colors hover:text-flame hover:underline"
+                >
+                  ???
+                </span>
+                <span className="text-ink">(? Winners)</span>
                 <span className="ml-auto text-xs font-medium tracking-[0.15em] text-ink/40 uppercase">
                   Coming Soon
                 </span>
