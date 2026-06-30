@@ -15,6 +15,7 @@ import {
 
 const NAV_LINKS = [
   { href: "/brand", label: "Brand" },
+  { href: "/rules", label: "Rules" },
   { href: "/sponsor", label: "Sponsor" },
 ];
 
