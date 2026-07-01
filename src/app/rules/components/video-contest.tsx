@@ -75,6 +75,11 @@ export function VideoContestGuide() {
       </p>
 
 
+      <SubHeading>Can we submit the video as a group?</SubHeading>
+      <p>
+        A: Group videos are welcome!  Please keep it no more than 2 people as we have limited spots.
+      </p>
+
       <SubHeading>Can we participate in the hackathon/creative events too if we posted a video?</SubHeading>
       <p>
         A: Yes!  The winners will be announced before the other events start.
