@@ -13,7 +13,7 @@ export function VideoContestGuide() {
           Post your reel publicly on Instagram and tag{" "}
           <ProseLink href="https://instagram.com/onsenretreat">
             @onsenretreat
-          </ProseLink>
+          </ProseLink>{" "}
           and use #onsenretreat2026 in the description.
         </li>
         <li>
