@@ -12,6 +12,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
+import { AboutGuide } from "./about";
 import { VideoContestGuide } from "./video-contest";
 import { HackathonGuide } from "./hackathon";
 import { ArtDesignContestGuide } from "./art-design-contest";
@@ -35,6 +36,7 @@ const GROUPS: GuideGroup[] = [
   {
     label: "General",
     guides: [
+      { id: "about", label: "About", Component: AboutGuide },
       { id: "eligibility", label: "Eligibility", Component: EligibilityGuide },
       { id: "visa", label: "Visa & Travel", Component: VisaGuide },
       { id: "expenses", label: "Expenses", Component: ExpensesGuide },

@@ -5,16 +5,6 @@
 import "./src/env.js";
 
 /** @type {import("next").NextConfig} */
-const config = {
-  async redirects() {
-    return [
-      {
-        source: "/video-contest",
-        destination: "/rules#video-contest",
-        permanent: true,
-      },
-    ];
-  },
-};
+const config = {};
 
 export default config;
