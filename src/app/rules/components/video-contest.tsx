@@ -14,7 +14,7 @@ export function VideoContestGuide() {
           <ProseLink href="https://instagram.com/onsenretreat">
             @onsenretreat
           </ProseLink>{" "}
-          and use #onsenretreat2026 in the description.
+          and use #onsenretreat2026.
         </li>
         <li>
           (Optional) Drop it in the{" "}
