@@ -146,11 +146,11 @@ export function Hero() {
 
 
             <Link
-              href="/video-contest"
+              href="#program"
               style={{ opacity: textOpacity }}
               className="group animate-in fade-in slide-in-from-bottom-3 mt-8 inline-flex items-center gap-2 font-inclusive text-lg font-bold tracking-wide text-ink uppercase underline underline-offset-8 decoration-1 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:decoration-2 hover:underline-offset-[10px] sm:text-xl"
             >
-              Video Contest On Right Now
+              JOIN NOW
             </Link>
 
           </div>
