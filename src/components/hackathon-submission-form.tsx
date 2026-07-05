@@ -15,6 +15,7 @@ export function HackathonSubmissionForm() {
   const [handle, setHandle] = useState("");
   const [projectLink, setProjectLink] = useState("");
   const [videoLink, setVideoLink] = useState("");
+  const [marketingConsent, setMarketingConsent] = useState(false);
   const [notes, setNotes] = useState("");
 
   const submit = api.hackathonSubmission.submit.useMutation({
@@ -24,6 +25,7 @@ export function HackathonSubmissionForm() {
       setHandle("");
       setProjectLink("");
       setVideoLink("");
+      setMarketingConsent(false);
       setNotes("");
     },
     onError: () => {
@@ -70,6 +72,7 @@ export function HackathonSubmissionForm() {
             handle,
             projectLink,
             videoLink,
+            marketingConsent,
             notes,
           });
         }}
@@ -153,6 +156,21 @@ export function HackathonSubmissionForm() {
             A demo or walkthrough video.
           </p>
         </div>
+        <label
+          htmlFor="hs-marketing"
+          className="flex items-start gap-3 py-1 cursor-pointer"
+        >
+          <input
+            id="hs-marketing"
+            type="checkbox"
+            checked={marketingConsent}
+            onChange={(e) => setMarketingConsent(e.target.checked)}
+            className="mt-0.5 size-4 shrink-0 accent-ink"
+          />
+          <span className={cn(labelClass, "normal-case text-ink/70")}>
+            Can we use parts of this video as marketing material?
+          </span>
+        </label>
         <div className="flex flex-col gap-2">
           <Label htmlFor="hs-notes" className={labelClass}>
             Anything else we should know?

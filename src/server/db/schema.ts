@@ -71,6 +71,8 @@ export const hackathonSubmissions = createTable("hackathon_submission", (d) => (
   handle: d.varchar({ length: 256 }).notNull(),
   projectLink: d.text().notNull(),
   videoLink: d.text(),
+  // Whether the entrant consents to us using their video as marketing material.
+  marketingConsent: d.boolean().default(false).notNull(),
   notes: d.text(),
   confirmationEmailSent: d.boolean().default(false),
   createdAt: d
@@ -87,6 +89,8 @@ export const artSubmissions = createTable("art_submission", (d) => ({
   handle: d.varchar({ length: 256 }).notNull(),
   projectLink: d.text().notNull(),
   videoLink: d.text(),
+  // Whether the entrant consents to us using their video as marketing material.
+  marketingConsent: d.boolean().default(false).notNull(),
   notes: d.text(),
   confirmationEmailSent: d.boolean().default(false),
   createdAt: d

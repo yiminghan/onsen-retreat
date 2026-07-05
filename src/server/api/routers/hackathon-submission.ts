@@ -18,6 +18,7 @@ export const hackathonSubmissionRouter = createTRPCRouter({
         handle: z.string().min(1).max(256),
         projectLink: z.string().url(),
         videoLink: z.string().url(),
+        marketingConsent: z.boolean().optional(),
         notes: z.string().optional(),
       }),
     )
@@ -37,6 +38,7 @@ export const hackathonSubmissionRouter = createTRPCRouter({
           handle,
           projectLink: input.projectLink.trim(),
           videoLink: trim(input.videoLink),
+          marketingConsent: input.marketingConsent ?? false,
           notes: trim(input.notes),
         })
         .returning();
@@ -46,7 +48,8 @@ export const hackathonSubmissionRouter = createTRPCRouter({
         await sendSlackNotification(
           `🛠️ New hackathon submission from *${inserted.name}* (${inserted.handle}) · ${inserted.email}` +
             `\nProject: ${inserted.projectLink}` +
-            (inserted.videoLink ? `\nVideo: ${inserted.videoLink}` : ""),
+            (inserted.videoLink ? `\nVideo: ${inserted.videoLink}` : "") +
+            `\nMarketing consent: ${inserted.marketingConsent ? "yes" : "no"}`,
         );
 
         try {

@@ -17,7 +17,7 @@ export const artSubmissionRouter = createTRPCRouter({
         email: z.string().email(),
         handle: z.string().min(1).max(256),
         projectLink: z.string().url(),
-        videoLink: z.string().url(),
+        marketingConsent: z.boolean().optional(),
         notes: z.string().optional(),
       }),
     )
@@ -36,7 +36,7 @@ export const artSubmissionRouter = createTRPCRouter({
           email: input.email.toLowerCase().trim(),
           handle,
           projectLink: input.projectLink.trim(),
-          videoLink: trim(input.videoLink),
+          marketingConsent: input.marketingConsent ?? false,
           notes: trim(input.notes),
         })
         .returning();
@@ -45,8 +45,9 @@ export const artSubmissionRouter = createTRPCRouter({
       if (inserted) {
         await sendSlackNotification(
           `🎨 New art/design submission from *${inserted.name}* (${inserted.handle}) · ${inserted.email}` +
-            `\nArtwork: ${inserted.projectLink}` +
-            (inserted.videoLink ? `\nVideo: ${inserted.videoLink}` : ""),
+          `\nArtwork: ${inserted.projectLink}` +
+          (inserted.videoLink ? `\nVideo: ${inserted.videoLink}` : "") +
+          `\nMarketing consent: ${inserted.marketingConsent ? "yes" : "no"}`,
         );
 
         try {

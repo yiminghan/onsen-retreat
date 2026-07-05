@@ -15,6 +15,7 @@ export function ArtSubmissionForm() {
   const [handle, setHandle] = useState("");
   const [projectLink, setProjectLink] = useState("");
   const [videoLink, setVideoLink] = useState("");
+  const [marketingConsent, setMarketingConsent] = useState(false);
   const [notes, setNotes] = useState("");
 
   const submit = api.artSubmission.submit.useMutation({
@@ -24,6 +25,7 @@ export function ArtSubmissionForm() {
       setHandle("");
       setProjectLink("");
       setVideoLink("");
+      setMarketingConsent(false);
       setNotes("");
     },
     onError: () => {
@@ -70,6 +72,7 @@ export function ArtSubmissionForm() {
             handle,
             projectLink,
             videoLink,
+            marketingConsent,
             notes,
           });
         }}
@@ -133,25 +136,33 @@ export function ArtSubmissionForm() {
             className={fieldClass}
           />
           <p className={cn(labelClass, "normal-case text-ink/45")}>
-            A link to your artwork, portfolio, or gallery.
+            A link to your art post on Instagram.
           </p>
         </div>
         <div className="flex flex-col gap-2">
-          <Label htmlFor="as-video" className={labelClass}>
-            Video link
+          <Label className={labelClass}>
+            Can we use parts of your art as marketing material? (We will tag you too!)
           </Label>
-          <Input
-            id="as-video"
-            type="url"
-            required
-            placeholder="https://youtube.com/..."
-            value={videoLink}
-            onChange={(e) => setVideoLink(e.target.value)}
-            className={fieldClass}
-          />
-          <p className={cn(labelClass, "normal-case text-ink/45")}>
-            A demo or walkthrough video.
-          </p>
+          <div className="mt-1 inline-flex self-start border border-ink/20">
+            {[
+              { label: "Yes", value: true },
+              { label: "No", value: false },
+            ].map((option) => (
+              <button
+                key={option.label}
+                type="button"
+                onClick={() => setMarketingConsent(option.value)}
+                className={cn(
+                  "px-5 py-1.5 text-[0.7rem] font-semibold tracking-[0.15em] uppercase transition-colors",
+                  marketingConsent === option.value
+                    ? "bg-ink text-sand"
+                    : "text-ink/50 hover:text-ink",
+                )}
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
         </div>
         <div className="flex flex-col gap-2">
           <Label htmlFor="as-notes" className={labelClass}>
