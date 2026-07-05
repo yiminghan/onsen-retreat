@@ -156,21 +156,32 @@ export function HackathonSubmissionForm() {
             A demo or walkthrough video.
           </p>
         </div>
-        <label
-          htmlFor="hs-marketing"
-          className="flex items-start gap-3 py-1 cursor-pointer"
-        >
-          <input
-            id="hs-marketing"
-            type="checkbox"
-            checked={marketingConsent}
-            onChange={(e) => setMarketingConsent(e.target.checked)}
-            className="mt-0.5 size-4 shrink-0 accent-ink"
-          />
-          <span className={cn(labelClass, "normal-case text-ink/70")}>
-            Can we use parts of this video as marketing material?
-          </span>
-        </label>
+        <div className="flex flex-col gap-2">
+          <Label className={labelClass}>
+            Can we use parts of this video as marketing material? (We will tag
+            you too!)
+          </Label>
+          <div className="mt-1 inline-flex self-start border border-ink/20">
+            {[
+              { label: "Yes", value: true },
+              { label: "No", value: false },
+            ].map((option) => (
+              <button
+                key={option.label}
+                type="button"
+                onClick={() => setMarketingConsent(option.value)}
+                className={cn(
+                  "px-5 py-1.5 text-[0.7rem] font-semibold tracking-[0.15em] uppercase transition-colors",
+                  marketingConsent === option.value
+                    ? "bg-ink text-sand"
+                    : "text-ink/50 hover:text-ink",
+                )}
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
+        </div>
         <div className="flex flex-col gap-2">
           <Label htmlFor="hs-notes" className={labelClass}>
             Anything else we should know?
