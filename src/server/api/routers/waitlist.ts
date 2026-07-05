@@ -3,6 +3,7 @@ import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 import { waitlist } from "~/server/db/schema";
+import { addContactToSegment } from "~/server/email";
 import { sendOnboardingEmail } from "~/server/email/templates/onboarding";
 import { sendSlackNotification } from "~/server/slack";
 
@@ -59,6 +60,17 @@ export const waitlistRouter = createTRPCRouter({
             .where(eq(waitlist.id, inserted.id));
         } catch (error) {
           console.error("Failed to send onboarding email", error);
+        }
+
+        // Auto-add new signups to the Resend segment. Independent of the
+        // onboarding email — a failure here shouldn't break signup.
+        try {
+          await addContactToSegment({
+            email: inserted.email,
+            name: inserted.name,
+          });
+        } catch (error) {
+          console.error("Failed to add signup to Resend segment", error);
         }
       }
 
