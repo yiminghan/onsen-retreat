@@ -4,6 +4,7 @@ import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 import { waitlist } from "~/server/db/schema";
 import { sendOnboardingEmail } from "~/server/email/templates/onboarding";
+import { sendSlackNotification } from "~/server/slack";
 
 export const waitlistRouter = createTRPCRouter({
   join: publicProcedure
@@ -39,6 +40,13 @@ export const waitlistRouter = createTRPCRouter({
       // Only email genuinely new signups (a conflict returns no row), and flip
       // the flag only after a successful send so we can retry failures later.
       if (inserted) {
+        await sendSlackNotification(
+          `🌱 New signup: *${inserted.name}* (${inserted.email})` +
+            (inserted.handle ? ` · ${inserted.handle}` : "") +
+            (inserted.school ? ` · ${inserted.school}` : "") +
+            `\nProject: ${inserted.project}`,
+        );
+
         try {
           await sendOnboardingEmail({
             to: inserted.email,

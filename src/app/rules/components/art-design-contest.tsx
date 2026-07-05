@@ -1,9 +1,5 @@
-// Placeholder. Replace with final contest copy when ready.
-export function ArtDesignContestGuide() {
-  return (
-    <div className="space-y-5 text-lg font-light leading-relaxed tracking-wide text-ink/75">
+import { ContestGuide } from "./contest-guide";
 
-      <p className="text-ink/55 italic">Details coming soon.</p>
-    </div>
-  );
+export function ArtDesignContestGuide() {
+  return <ContestGuide submissionHref="/art-submission" />;
 }

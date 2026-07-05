@@ -62,3 +62,35 @@ export const videoSubmissions = createTable(
   }),
   (t) => [uniqueIndex("video_submission_handle_idx").on(t.handle)],
 );
+
+export const hackathonSubmissions = createTable("hackathon_submission", (d) => ({
+  id: d.integer().primaryKey().generatedByDefaultAsIdentity(),
+  name: d.varchar({ length: 256 }).notNull(),
+  email: d.varchar({ length: 320 }).notNull(),
+  // Normalized IG handle (lowercased, no leading "@").
+  handle: d.varchar({ length: 256 }).notNull(),
+  projectLink: d.text().notNull(),
+  videoLink: d.text(),
+  notes: d.text(),
+  confirmationEmailSent: d.boolean().default(false),
+  createdAt: d
+    .timestamp({ withTimezone: true })
+    .$defaultFn(() => /* @__PURE__ */ new Date())
+    .notNull(),
+}));
+
+export const artSubmissions = createTable("art_submission", (d) => ({
+  id: d.integer().primaryKey().generatedByDefaultAsIdentity(),
+  name: d.varchar({ length: 256 }).notNull(),
+  email: d.varchar({ length: 320 }).notNull(),
+  // Normalized IG handle (lowercased, no leading "@").
+  handle: d.varchar({ length: 256 }).notNull(),
+  projectLink: d.text().notNull(),
+  videoLink: d.text(),
+  notes: d.text(),
+  confirmationEmailSent: d.boolean().default(false),
+  createdAt: d
+    .timestamp({ withTimezone: true })
+    .$defaultFn(() => /* @__PURE__ */ new Date())
+    .notNull(),
+}));

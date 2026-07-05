@@ -2,21 +2,22 @@ import { eq } from "drizzle-orm";
 import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import { videoSubmissions } from "~/server/db/schema";
-import { sendVideoSubmissionEmail } from "~/server/email/templates/videoSubmission";
+import { artSubmissions } from "~/server/db/schema";
+import { sendArtSubmissionEmail } from "~/server/email/templates/artSubmission";
 import { sendSlackNotification } from "~/server/slack";
 
 const normalizeHandle = (value: string) =>
   value.trim().replace(/^@+/, "").toLowerCase();
 
-export const videoSubmissionRouter = createTRPCRouter({
+export const artSubmissionRouter = createTRPCRouter({
   submit: publicProcedure
     .input(
       z.object({
-        handle: z.string().min(1).max(256),
+        name: z.string().min(1).max(256),
         email: z.string().email(),
-        submissionLink: z.string().url(),
-        name: z.string().max(256).optional(),
+        handle: z.string().min(1).max(256),
+        projectLink: z.string().url(),
+        videoLink: z.string().url(),
         notes: z.string().optional(),
       }),
     )
@@ -29,40 +30,38 @@ export const videoSubmissionRouter = createTRPCRouter({
       const handle = normalizeHandle(input.handle);
 
       const [inserted] = await ctx.db
-        .insert(videoSubmissions)
+        .insert(artSubmissions)
         .values({
-          handle,
+          name: input.name.trim(),
           email: input.email.toLowerCase().trim(),
-          submissionLink: input.submissionLink.trim(),
-          name: trim(input.name),
+          handle,
+          projectLink: input.projectLink.trim(),
+          videoLink: trim(input.videoLink),
           notes: trim(input.notes),
         })
-        .onConflictDoNothing()
         .returning();
 
-      // Only email genuinely new entries (a duplicate handle returns no row),
-      // and flip the flag only after a successful send so we can retry failures.
+      // Flip the flag only after a successful send so we can retry failures.
       if (inserted) {
         await sendSlackNotification(
-          `🎬 New video submission from *${inserted.handle}*` +
-            (inserted.name ? ` (${inserted.name})` : "") +
-            ` · ${inserted.email}` +
-            `\nLink: ${inserted.submissionLink}`,
+          `🎨 New art/design submission from *${inserted.name}* (${inserted.handle}) · ${inserted.email}` +
+            `\nArtwork: ${inserted.projectLink}` +
+            (inserted.videoLink ? `\nVideo: ${inserted.videoLink}` : ""),
         );
 
         try {
-          await sendVideoSubmissionEmail({
+          await sendArtSubmissionEmail({
             to: inserted.email,
             name: inserted.name,
             handle: inserted.handle,
           });
 
           await ctx.db
-            .update(videoSubmissions)
+            .update(artSubmissions)
             .set({ confirmationEmailSent: true })
-            .where(eq(videoSubmissions.id, inserted.id));
+            .where(eq(artSubmissions.id, inserted.id));
         } catch (error) {
-          console.error("Failed to send video submission email", error);
+          console.error("Failed to send art submission email", error);
         }
       }
 

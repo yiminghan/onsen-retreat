@@ -6,7 +6,6 @@ export function VideoContestGuide() {
       <p>
         Make a short reel about the retreat and post it publicly on Instagram.
       </p>
-
       <SubHeading>How to enter</SubHeading>
       <ol className="list-decimal space-y-2 pl-5">
         <li>
