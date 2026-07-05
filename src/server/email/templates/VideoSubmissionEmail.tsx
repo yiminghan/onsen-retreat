@@ -38,7 +38,7 @@ export function VideoSubmissionEmail({
             <Text style={paragraph}>
               A quick reminder of how it works: winners are picked on{" "}
               <strong>creativity</strong> — your storytelling and visuals — not
-              views or likes. We&apos;ll select 2–3 winners and annouce them by end of July.
+              views or likes. We&apos;ll select 2-3 winners and annouce them by end of July.
             </Text>
             <Text style={paragraph}>
               If you haven&apos;t already, make sure your reel is public and

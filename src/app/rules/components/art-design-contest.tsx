@@ -42,6 +42,9 @@ export function ArtDesignContestGuide() {
         <p>Submissions open until July 28, 2026</p>
         <p>Winners will be selected Aug 7, 2026</p>
       </ul>
+      <p>
+        We&apos;ll select <span className="font-medium text-ink">3-4 winners</span>.
+      </p>
 
       <SubHeading>Can we submit as a group?</SubHeading>
       <p>

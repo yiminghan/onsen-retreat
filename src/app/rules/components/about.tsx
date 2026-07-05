@@ -1,5 +1,22 @@
 import { SubHeading } from "./shared";
 
+// Deep-links to another rules guide. The switcher in rules-guides.tsx listens
+// for hash changes, so a plain #id anchor swaps the active guide in place.
+function SectionLink({ id, label }: { id: string; label: string }) {
+  return (
+    <>
+      (See{" "}
+      <a
+        href={`#${id}`}
+        className="underline underline-offset-4 transition-opacity hover:opacity-60"
+      >
+        &quot;{label}&quot;
+      </a>{" "}
+      section.)
+    </>
+  );
+}
+
 export function AboutGuide() {
   return (
     <div className="space-y-5 text-lg font-light leading-relaxed tracking-wide text-ink/75">
@@ -14,16 +31,32 @@ export function AboutGuide() {
 
       <SubHeading>How to get selected</SubHeading>
 
-      <ul className="list-disc space-y-2 pl-5">
+      <ul className="list-disc space-y-6 pl-5">
         <li>
           <span className="font-medium text-ink">Video Contest</span> — make a
           short reel about the retreat and post it publicly on Instagram. We
-          select winners on storytelling, visuals, and authenticity {`(See "Video Contest" section.)`}
+          select <span className="font-medium text-ink">2-3 winners</span> on
+          storytelling, visuals, and authenticity{" "}
+          <br />
+          <SectionLink id="video-contest" label="Video Contest" />
+          <br />
         </li>
         <li>
-          <span className="font-medium text-ink">Hackathon</span> and{" "}
+          <span className="font-medium text-ink">Hackathon</span> — build a
+          project over the retreat and demo it. We select{" "}
+          <span className="font-medium text-ink">3-4 winners</span> based on concept and creativity.
+          <br />
+          <SectionLink id="hackathon" label="Hackathon" />
+          <br />
+        </li>
+        <li>
           <span className="font-medium text-ink">Art / Design Contest</span> —
-          enter one of the creative contests with your own work. (More details coming soon)
+          submit an original piece of art or design. We select{" "}
+          <span className="font-medium text-ink">3-4 winners</span> on concept,
+          craft, and originality{" "}
+          <br />
+          <SectionLink id="art-design-contest" label="Art / Design Contest" />
+          <br />
         </li>
       </ul>
       <p>

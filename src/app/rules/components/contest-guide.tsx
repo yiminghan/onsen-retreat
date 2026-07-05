@@ -35,6 +35,9 @@ export function ContestGuide({ submissionHref }: { submissionHref: string }) {
         <p>Submissions open until July 22, 2026</p>
         <p>Online demos will begin July 31, 2026</p>
       </ul>
+      <p>
+        We&apos;ll select <span className="font-medium text-ink">3-4 winners</span>.
+      </p>
 
       <SubHeading>Can we submit the video as a group?</SubHeading>
       <p>
