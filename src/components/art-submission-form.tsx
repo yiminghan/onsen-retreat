@@ -14,7 +14,6 @@ export function ArtSubmissionForm() {
   const [email, setEmail] = useState("");
   const [handle, setHandle] = useState("");
   const [projectLink, setProjectLink] = useState("");
-  const [videoLink, setVideoLink] = useState("");
   const [marketingConsent, setMarketingConsent] = useState(false);
   const [notes, setNotes] = useState("");
 
@@ -24,7 +23,6 @@ export function ArtSubmissionForm() {
       setEmail("");
       setHandle("");
       setProjectLink("");
-      setVideoLink("");
       setMarketingConsent(false);
       setNotes("");
     },
@@ -71,7 +69,6 @@ export function ArtSubmissionForm() {
             email,
             handle,
             projectLink,
-            videoLink,
             marketingConsent,
             notes,
           });

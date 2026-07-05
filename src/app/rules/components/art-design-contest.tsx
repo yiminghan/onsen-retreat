@@ -43,15 +43,9 @@ export function ArtDesignContestGuide() {
         <p>Winners will be selected Aug 7, 2026</p>
       </ul>
 
-      <SubHeading>Can we submit the video as a group?</SubHeading>
+      <SubHeading>Can we submit as a group?</SubHeading>
       <p>
-        A: Group videos are welcome! Please keep no more than 2 people as we
-        have limited spots.
-      </p>
-
-      <SubHeading>Can we use an existing project?</SubHeading>
-      <p>
-        A: Yes!  As long as you want to keep working on it, you can use an existing project.
+        A: Please keep no more than 2 people as we have limited spots.
       </p>
 
       <SubHeading>Can we use AI in our projects?</SubHeading>
