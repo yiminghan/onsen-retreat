@@ -30,6 +30,21 @@ export function ContestGuide({ submissionHref }: { submissionHref: string }) {
         <li>How you built it / tools used</li>
       </ul>
 
+      <p>
+        We recommend using Loom for your recording.
+        <br />
+        You can see an example video here:{" "}
+        <a
+          href="https://www.loom.com/share/c4a9cd608b414a00bc48881d291cf0b8"
+          className="underline underline-offset-4 transition-opacity hover:opacity-60"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          https://www.loom.com/share/c4a9cd608b414a00bc48881d291cf0b8
+        </a>
+
+      </p>
+
       <SubHeading>Timeline</SubHeading>
       <ul>
         <p>Submissions open until July 22, 2026</p>
@@ -38,6 +53,14 @@ export function ContestGuide({ submissionHref }: { submissionHref: string }) {
       <p>
         We&apos;ll select <span className="font-medium text-ink">3-4 winners</span>.
       </p>
+
+      <SubHeading>What is online demos?</SubHeading>
+      <p>
+        A: You will demo your project live to 2-3 judges and answer some questions.
+        <br />
+        Exact demos times to be announced based on all the finalist&apos;s timezones.
+      </p>
+
 
       <SubHeading>Can we submit the video as a group?</SubHeading>
       <p>
