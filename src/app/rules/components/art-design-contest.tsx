@@ -7,7 +7,7 @@ export function ArtDesignContestGuide() {
       <SubHeading>How to enter</SubHeading>
       <ol className="list-decimal space-y-2 pl-5">
         <li>
-          Make a casual video about your art.
+          Make a post / video about your art.
         </li>
         <li>
           Post your work publicly on Instagram and tag{" "}
