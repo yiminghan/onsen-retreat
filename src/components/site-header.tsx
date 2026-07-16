@@ -19,6 +19,27 @@ const NAV_LINKS = [
   { href: "/sponsor", label: "Sponsor" },
 ];
 
+const INSTAGRAM_URL = "https://www.instagram.com/onsenretreat";
+
+function InstagramIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+      className={className}
+    >
+      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+    </svg>
+  );
+}
+
 export function SiteHeader() {
   const pathname = usePathname();
   const isHome = pathname === "/";
@@ -49,6 +70,15 @@ export function SiteHeader() {
 
         {/* Desktop nav */}
         <div className="hidden items-center gap-10 md:flex lg:gap-16">
+          <a
+            href={INSTAGRAM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Onsen Retreat on Instagram"
+            className="text-ink transition-opacity hover:opacity-60"
+          >
+            <InstagramIcon className="size-6" />
+          </a>
           {NAV_LINKS.map((link) => (
             <Link
               key={link.label}
@@ -58,6 +88,7 @@ export function SiteHeader() {
               {link.label}
             </Link>
           ))}
+
         </div>
 
         {/* Mobile menu */}
@@ -86,6 +117,19 @@ export function SiteHeader() {
                   <Link href={link.href}>{link.label}</Link>
                 </DropdownMenuItem>
               ))}
+              <DropdownMenuItem
+                asChild
+                className="px-2.5 py-2 font-inclusive text-sm font-bold tracking-wide text-ink uppercase focus:bg-ink/5 focus:text-ink"
+              >
+                <a
+                  href={INSTAGRAM_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <InstagramIcon className="size-4" />
+                  Instagram
+                </a>
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
