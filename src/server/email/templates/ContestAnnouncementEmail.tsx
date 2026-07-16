@@ -38,7 +38,7 @@ function buildContests(baseUrl: string): Contest[] {
       title: "Hackathon (3-4 Winners)",
       blurb:
         "Build a project and make a casual demo video — who you are, your story, what you're building, and why it matters.",
-      deadline: "Jul 22",
+      deadline: "Jul 25",
       ctaLabel: "Details",
       ctaHref: `${baseUrl}/rules#hackathon`,
     },
