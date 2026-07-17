@@ -38,7 +38,7 @@ export function ArtSubmissionEmail({ name, handle }: ArtSubmissionEmailProps) {
             </Text>
             <Text style={paragraph}>
               In the meantime, feel free to drop by our{" "}
-              <a href="https://discord.gg/fhqu7GY42" target="_blank">
+              <a href="https://discord.gg/RPX25Cvvj" target="_blank">
                 Discord
               </a>{" "}
               for any questions.

@@ -37,7 +37,7 @@ export function OnboardingEmail({ name }: OnboardingEmailProps) {
               🥹 Seeing everyone&apos;s comments and support really warms my heart, and I&apos;m will do my best to make this event a success.
             </Text>
             <Text style={paragraph}>
-              In the meantime - please join our <a href="https://discord.gg/fhqu7GY42" target="_blank ">discord</a>, where I will be sharing some more details in the upcoming days.
+              In the meantime - please join our <a href="https://discord.gg/RPX25Cvvj" target="_blank ">discord</a>, where I will be sharing some more details in the upcoming days.
             </Text>
 
             <Text style={paragraph}>

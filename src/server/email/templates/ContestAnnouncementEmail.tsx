@@ -106,7 +106,7 @@ export function ContestAnnouncementEmail({
               <br />
               Also don&apos;t forget to come hang out in our{" "}
               <a
-                href="https://discord.gg/fhqu7GY42"
+                href="https://discord.gg/RPX25Cvvj"
                 target="_blank"
                 style={link}
               >
