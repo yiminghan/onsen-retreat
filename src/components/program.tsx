@@ -33,7 +33,7 @@ export function Program() {
                 </Link>
                 <span className="text-ink">(2-3 Winners)</span>
                 <span className="ml-auto text-xs font-medium tracking-[0.15em] text-flame uppercase">
-                  Ends Jul 18
+                  Ends Jul 25
                 </span>
               </li>
               <li className="flex items-baseline gap-2">

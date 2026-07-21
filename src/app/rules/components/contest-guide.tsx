@@ -47,7 +47,7 @@ export function ContestGuide({ submissionHref }: { submissionHref: string }) {
 
       <SubHeading>Timeline</SubHeading>
       <ul>
-        <p>Submissions open until July 22, 2026</p>
+        <p>Submissions open until July 25, 2026</p>
         <p>Online demos will begin July 31, 2026</p>
       </ul>
       <p>

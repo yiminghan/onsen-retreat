@@ -59,10 +59,10 @@ export function VideoContestGuide() {
       <SubHeading>Timeline</SubHeading>
       <ul>
         <p>
-          Submissions open until July 18, 2026
+          Submissions open until July 25, 2026
         </p>
         <p>
-          Winners will be announced on July 22, 2026
+          Winners will be announced on July 31, 2026
         </p>
       </ul>
 

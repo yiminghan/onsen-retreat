@@ -30,7 +30,7 @@ function buildContests(baseUrl: string): Contest[] {
       title: "Video Contest (2-3 Winners)",
       blurb:
         "Make a short reel about the retreat and post it publicly on Instagram.",
-      deadline: "Jul 18",
+      deadline: "Jul 25",
       ctaLabel: "Details",
       ctaHref: `${baseUrl}/rules#video-contest`,
     },
