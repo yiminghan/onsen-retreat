@@ -2,14 +2,17 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Menu } from "lucide-react";
 
+import { authClient } from "~/lib/auth-client";
 import { Button } from "~/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
 
@@ -18,6 +21,9 @@ const NAV_LINKS = [
   { href: "/rules", label: "Rules" },
   { href: "/sponsor", label: "Sponsor" },
 ];
+
+// Hidden while the profile page is WIP — flip to true to show login/account.
+const SHOW_AUTH = false;
 
 const INSTAGRAM_URL = "https://www.instagram.com/onsenretreat";
 
@@ -42,7 +48,14 @@ function InstagramIcon({ className }: { className?: string }) {
 
 export function SiteHeader() {
   const pathname = usePathname();
+  const router = useRouter();
   const isHome = pathname === "/";
+  const { data: session, isPending } = authClient.useSession();
+
+  const handleSignOut = async () => {
+    await authClient.signOut();
+    router.refresh();
+  };
 
   return (
     <header className="absolute inset-x-0 top-0 z-30">
@@ -89,6 +102,37 @@ export function SiteHeader() {
             </Link>
           ))}
 
+          {SHOW_AUTH &&
+            !isPending &&
+            (session ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger className="font-inclusive text-lg font-bold tracking-wide text-ink uppercase transition-opacity hover:opacity-60 lg:text-xl">
+                  {session.user.name.split(" ")[0]}
+                </DropdownMenuTrigger>
+                <DropdownMenuContent
+                  align="end"
+                  className="w-52 border-none bg-sand p-1.5 ring-1 ring-ink/15"
+                >
+                  <DropdownMenuLabel className="px-2.5 py-2 text-xs font-light text-ink/50">
+                    {session.user.email}
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator className="bg-ink/10" />
+                  <DropdownMenuItem
+                    onSelect={handleSignOut}
+                    className="px-2.5 py-2 font-inclusive text-sm font-bold tracking-wide text-ink uppercase focus:bg-ink/5 focus:text-ink"
+                  >
+                    Sign out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Link
+                href="/login"
+                className="font-inclusive text-lg font-bold tracking-wide text-ink uppercase transition-opacity hover:opacity-60 lg:text-xl"
+              >
+                Log in
+              </Link>
+            ))}
         </div>
 
         {/* Mobile menu */}
@@ -130,6 +174,23 @@ export function SiteHeader() {
                   Instagram
                 </a>
               </DropdownMenuItem>
+              {SHOW_AUTH &&
+                !isPending &&
+                (session ? (
+                  <DropdownMenuItem
+                    onSelect={handleSignOut}
+                    className="px-2.5 py-2 font-inclusive text-sm font-bold tracking-wide text-ink uppercase focus:bg-ink/5 focus:text-ink"
+                  >
+                    Sign out
+                  </DropdownMenuItem>
+                ) : (
+                  <DropdownMenuItem
+                    asChild
+                    className="px-2.5 py-2 font-inclusive text-sm font-bold tracking-wide text-ink uppercase focus:bg-ink/5 focus:text-ink"
+                  >
+                    <Link href="/login">Log in</Link>
+                  </DropdownMenuItem>
+                ))}
             </DropdownMenuContent>
           </DropdownMenu>
         </div>

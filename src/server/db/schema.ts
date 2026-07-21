@@ -81,6 +81,85 @@ export const hackathonSubmissions = createTable("hackathon_submission", (d) => (
     .notNull(),
 }));
 
+/**
+ * Better Auth core tables. Property keys are camelCase because Better Auth
+ * expects those exact field names; the drizzle adapter maps models to these
+ * tables via the schema object keys in `src/server/auth.ts`.
+ */
+export const user = createTable("user", (d) => ({
+  id: d.text().primaryKey(),
+  name: d.text().notNull(),
+  email: d.text().notNull().unique(),
+  emailVerified: d.boolean().notNull().default(false),
+  image: d.text(),
+  createdAt: d.timestamp({ withTimezone: true }).notNull().defaultNow(),
+  updatedAt: d.timestamp({ withTimezone: true }).notNull().defaultNow(),
+}));
+
+export const session = createTable(
+  "session",
+  (d) => ({
+    id: d.text().primaryKey(),
+    expiresAt: d.timestamp({ withTimezone: true }).notNull(),
+    token: d.text().notNull().unique(),
+    ipAddress: d.text(),
+    userAgent: d.text(),
+    userId: d
+      .text()
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
+    createdAt: d.timestamp({ withTimezone: true }).notNull().defaultNow(),
+    updatedAt: d.timestamp({ withTimezone: true }).notNull().defaultNow(),
+  }),
+  (t) => [index("session_user_id_idx").on(t.userId)],
+);
+
+export const account = createTable(
+  "account",
+  (d) => ({
+    id: d.text().primaryKey(),
+    accountId: d.text().notNull(),
+    providerId: d.text().notNull(),
+    userId: d
+      .text()
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
+    accessToken: d.text(),
+    refreshToken: d.text(),
+    idToken: d.text(),
+    accessTokenExpiresAt: d.timestamp({ withTimezone: true }),
+    refreshTokenExpiresAt: d.timestamp({ withTimezone: true }),
+    scope: d.text(),
+    // scrypt hash for email/password accounts
+    password: d.text(),
+    createdAt: d.timestamp({ withTimezone: true }).notNull().defaultNow(),
+    updatedAt: d.timestamp({ withTimezone: true }).notNull().defaultNow(),
+  }),
+  (t) => [index("account_user_id_idx").on(t.userId)],
+);
+
+export const verification = createTable(
+  "verification",
+  (d) => ({
+    id: d.text().primaryKey(),
+    identifier: d.text().notNull(),
+    value: d.text().notNull(),
+    expiresAt: d.timestamp({ withTimezone: true }).notNull(),
+    createdAt: d.timestamp({ withTimezone: true }).notNull().defaultNow(),
+    updatedAt: d.timestamp({ withTimezone: true }).notNull().defaultNow(),
+  }),
+  (t) => [index("verification_identifier_idx").on(t.identifier)],
+);
+
+// Persistent rate-limit storage — in-memory counters reset on every
+// serverless invocation, so Better Auth is configured to store them here.
+export const rateLimit = createTable("rate_limit", (d) => ({
+  id: d.text().primaryKey(),
+  key: d.text(),
+  count: d.integer(),
+  lastRequest: d.bigint({ mode: "number" }),
+}));
+
 export const artSubmissions = createTable("art_submission", (d) => ({
   id: d.integer().primaryKey().generatedByDefaultAsIdentity(),
   name: d.varchar({ length: 256 }).notNull(),
