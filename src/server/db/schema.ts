@@ -81,6 +81,24 @@ export const hackathonSubmissions = createTable("hackathon_submission", (d) => (
     .notNull(),
 }));
 
+// One row per hit on a tracking link (e.g. onsen-retreat.com/carson).
+// `slug` identifies which link was visited so new links can reuse this table.
+export const linkVisits = createTable(
+  "link_visit",
+  (d) => ({
+    id: d.integer().primaryKey().generatedByDefaultAsIdentity(),
+    slug: d.varchar({ length: 64 }).notNull(),
+    ipAddress: d.varchar({ length: 64 }),
+    userAgent: d.text(),
+    referer: d.text(),
+    createdAt: d
+      .timestamp({ withTimezone: true })
+      .$defaultFn(() => /* @__PURE__ */ new Date())
+      .notNull(),
+  }),
+  (t) => [index("link_visit_slug_idx").on(t.slug)],
+);
+
 /**
  * Better Auth core tables. Property keys are camelCase because Better Auth
  * expects those exact field names; the drizzle adapter maps models to these
