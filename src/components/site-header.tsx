@@ -20,6 +20,7 @@ const NAV_LINKS = [
   { href: "/brand", label: "Brand" },
   { href: "/rules", label: "Rules" },
   { href: "/sponsor", label: "Sponsor" },
+  { href: "https://shop.onsen-retreat.com", label: "Shop", external: true },
 ];
 
 // Hidden while the profile page is WIP — flip to true to show login/account.
@@ -92,15 +93,27 @@ export function SiteHeader() {
           >
             <InstagramIcon className="size-6" />
           </a>
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              className="font-inclusive text-lg font-bold tracking-wide text-ink uppercase transition-opacity hover:opacity-60 lg:text-xl"
-            >
-              {link.label}
-            </Link>
-          ))}
+          {NAV_LINKS.map((link) =>
+            link.external ? (
+              <a
+                key={link.label}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-inclusive text-lg font-bold tracking-wide text-ink uppercase transition-opacity hover:opacity-60 lg:text-xl"
+              >
+                {link.label}
+              </a>
+            ) : (
+              <Link
+                key={link.label}
+                href={link.href}
+                className="font-inclusive text-lg font-bold tracking-wide text-ink uppercase transition-opacity hover:opacity-60 lg:text-xl"
+              >
+                {link.label}
+              </Link>
+            ),
+          )}
 
           {SHOW_AUTH &&
             !isPending &&
@@ -158,7 +171,17 @@ export function SiteHeader() {
                   asChild
                   className="px-2.5 py-2 font-inclusive text-sm font-bold tracking-wide text-ink uppercase focus:bg-ink/5 focus:text-ink"
                 >
-                  <Link href={link.href}>{link.label}</Link>
+                  {link.external ? (
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {link.label}
+                    </a>
+                  ) : (
+                    <Link href={link.href}>{link.label}</Link>
+                  )}
                 </DropdownMenuItem>
               ))}
               <DropdownMenuItem
