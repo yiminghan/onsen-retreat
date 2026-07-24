@@ -37,7 +37,7 @@ export function HackathonSubmissionEmail({
             </Text>
             <Text style={paragraph}>
               We&apos;ll be in touch by email with any next steps. If you need to
-              update anything about your submission, just reply to this email.
+              update anything about your submission, contact @onsenretreat on instagram.
             </Text>
             <Text style={paragraph}>
               In the meantime, feel free to drop by our{" "}
