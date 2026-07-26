@@ -1,9 +1,14 @@
-import { eq } from "drizzle-orm";
+import { eq, inArray, isNull, or } from "drizzle-orm";
 import { z } from "zod";
 
-import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+import {
+  createTRPCRouter,
+  protectedProcedure,
+  publicProcedure,
+} from "~/server/api/trpc";
 import { videoSubmissions } from "~/server/db/schema";
 import { sendVideoSubmissionEmail } from "~/server/email/templates/videoSubmission";
+import { sendVideoThankYouEmail } from "~/server/email/templates/videoThankYou";
 import { sendSlackNotification } from "~/server/slack";
 
 const normalizeHandle = (value: string) =>
@@ -68,4 +73,72 @@ export const videoSubmissionRouter = createTRPCRouter({
 
       return { ok: true };
     }),
+
+  /** Counts shown on the thank-you email admin page. */
+  thankYouStatus: protectedProcedure.query(async ({ ctx }) => {
+    const rows = await ctx.db
+      .select({
+        id: videoSubmissions.id,
+        thankYouEmailSent: videoSubmissions.thankYouEmailSent,
+      })
+      .from(videoSubmissions);
+
+    const pending = rows.filter((r) => !r.thankYouEmailSent).length;
+    return { total: rows.length, pending };
+  }),
+
+  /**
+   * Send the thank-you email to every entry that hasn't received it yet.
+   * Deduped by email address; the flag is only flipped after a successful
+   * send, so re-running retries failures without double-sending successes.
+   */
+  sendThankYouEmails: protectedProcedure.mutation(async ({ ctx }) => {
+    const pending = await ctx.db
+      .select()
+      .from(videoSubmissions)
+      .where(
+        or(
+          isNull(videoSubmissions.thankYouEmailSent),
+          eq(videoSubmissions.thankYouEmailSent, false),
+        ),
+      );
+
+    // One email per address even if someone entered multiple videos.
+    const byEmail = new Map<string, typeof pending>();
+    for (const row of pending) {
+      const key = row.email.toLowerCase().trim();
+      const group = byEmail.get(key);
+      if (group) group.push(row);
+      else byEmail.set(key, [row]);
+    }
+
+    let sent = 0;
+    const failed: string[] = [];
+
+    for (const [email, rows] of byEmail) {
+      try {
+        await sendVideoThankYouEmail({ to: email, name: rows[0]?.name });
+
+        await ctx.db
+          .update(videoSubmissions)
+          .set({ thankYouEmailSent: true })
+          .where(
+            inArray(
+              videoSubmissions.id,
+              rows.map((r) => r.id),
+            ),
+          );
+
+        sent += 1;
+      } catch (error) {
+        console.error(`Failed to send thank-you email to ${email}`, error);
+        failed.push(email);
+      }
+
+      // Stay under Resend's 2 requests/second rate limit.
+      await new Promise((resolve) => setTimeout(resolve, 600));
+    }
+
+    return { sent, failed, pending: byEmail.size };
+  }),
 });

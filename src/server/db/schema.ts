@@ -55,6 +55,7 @@ export const videoSubmissions = createTable(
     name: d.varchar({ length: 256 }),
     notes: d.text(),
     confirmationEmailSent: d.boolean().default(false),
+    thankYouEmailSent: d.boolean().default(false),
     createdAt: d
       .timestamp({ withTimezone: true })
       .$defaultFn(() => /* @__PURE__ */ new Date())
@@ -75,6 +76,7 @@ export const hackathonSubmissions = createTable("hackathon_submission", (d) => (
   marketingConsent: d.boolean().default(false).notNull(),
   notes: d.text(),
   confirmationEmailSent: d.boolean().default(false),
+  thankYouEmailSent: d.boolean().default(false),
   createdAt: d
     .timestamp({ withTimezone: true })
     .$defaultFn(() => /* @__PURE__ */ new Date())

@@ -1,6 +1,5 @@
 import {
   Body,
-  Button,
   Container,
   Head,
   Hr,
@@ -10,41 +9,50 @@ import {
   Text,
 } from "@react-email/components";
 
-export type OnboardingEmailProps = {
-  name: string;
+export type HackathonThankYouEmailProps = {
+  name?: string | null;
 };
 
-export function OnboardingEmail({ name }: OnboardingEmailProps) {
+export function HackathonThankYouEmail({ name }: HackathonThankYouEmailProps) {
+
   return (
     <Html>
       <Head />
-      <Preview>Welcome!</Preview>
+      <Preview>
+        Thank you for submitting to the first ever ONSEN RETREAT Hackathon
+      </Preview>
       <Body style={main}>
         <Container style={container}>
           <Section style={content}>
             <Text style={paragraph}>
-              Hi!  Thank you for signing up!
-              <br />
-              <br />
-              You are receiving this email because expressed interest in the ♨️ONSEN RETREAT♨️.
+              Thank you everyone who submitted a project for our very first
+              ONSEN RETREAT Hackathon - we were genuinely blown away by the
+              number of submissions.
             </Text>
             <Text style={paragraph}>
-              We are wrapping up submissions for our first retreat.  Please stay tuned for our second one!
+              We&apos;ll be reaching out to selected finalists over the next
+              two days for interviews, and announce selected participants in
+              the following weeks. Whether or not you&apos;re selected, we
+              truly hope this application is the start of something you&apos;ll
+              continue building.
             </Text>
             <Text style={paragraph}>
-              In the meantime - please join our <a href="https://discord.gg/RPX25Cvvj" target="_blank ">discord</a>.
+              This is only the beginning. We will be planning more retreats in
+              the future, including ones that are more technology focused - so
+              we can create more opportunities for an even wider range of
+              projects.
             </Text>
-
             <Text style={paragraph}>
-              YiMing
+              Again, thank you for supporting the first ever ONSEN RETREAT
+              Hackathon 🙌 here&apos;s to many more retreats to come.
             </Text>
-
+            <Text style={paragraph}>YiMing</Text>
           </Section>
           <Hr style={divider} />
           <Section style={footer}>
             <Text style={footerText}>
-              You&apos;re receiving this email because you signed up for Onsen
-              Retreat.
+              You&apos;re receiving this email because you submitted a project
+              to the Onsen Retreat hackathon.
             </Text>
           </Section>
         </Container>
@@ -53,11 +61,11 @@ export function OnboardingEmail({ name }: OnboardingEmailProps) {
   );
 }
 
-export default OnboardingEmail;
+export default HackathonThankYouEmail;
 
-OnboardingEmail.PreviewProps = {
+HackathonThankYouEmail.PreviewProps = {
   name: "YiMing",
-} satisfies OnboardingEmailProps;
+} satisfies HackathonThankYouEmailProps;
 
 const main: React.CSSProperties = {
   backgroundColor: "#f4f4f5",
@@ -78,31 +86,11 @@ const content: React.CSSProperties = {
   padding: "40px 40px 24px 40px",
 };
 
-const heading: React.CSSProperties = {
-  margin: "0 0 16px 0",
-  fontSize: "24px",
-  lineHeight: "1.3",
-  fontWeight: 700,
-  color: "#18181b",
-};
-
 const paragraph: React.CSSProperties = {
   margin: "0 0 16px 0",
   fontSize: "16px",
   lineHeight: "1.6",
   color: "#3f3f46",
-};
-
-const button: React.CSSProperties = {
-  display: "inline-block",
-  marginTop: "8px",
-  padding: "12px 24px",
-  backgroundColor: "#18181b",
-  color: "#ffffff",
-  textDecoration: "none",
-  borderRadius: "8px",
-  fontSize: "15px",
-  fontWeight: 600,
 };
 
 const divider: React.CSSProperties = {
