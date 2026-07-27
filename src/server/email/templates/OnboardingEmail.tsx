@@ -32,7 +32,7 @@ export function OnboardingEmail({ name }: OnboardingEmailProps) {
               We are wrapping up submissions for our first retreat.  Please stay tuned for our second one!
             </Text>
             <Text style={paragraph}>
-              In the meantime - please join our <a href="https://discord.gg/RPX25Cvvj" target="_blank ">discord</a>.
+              In the meantime - please join our <a href="https://discord.gg/6Acme54jn" target="_blank ">discord</a>.
             </Text>
 
             <Text style={paragraph}>

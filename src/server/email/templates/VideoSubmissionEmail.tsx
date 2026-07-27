@@ -46,7 +46,7 @@ export function VideoSubmissionEmail({
               <a href="https://instagram.com/onsenretreat" target="_blank">
                 @onsenretreat
               </a>{" "}, and feel free to drop it in our{" "}
-              <a href="https://discord.gg/RPX25Cvvj" target="_blank">
+              <a href="https://discord.gg/6Acme54jn" target="_blank">
                 Discord
               </a>{" "}
               too for any questions.

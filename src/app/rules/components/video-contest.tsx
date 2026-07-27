@@ -17,7 +17,7 @@ export function VideoContestGuide() {
         </li>
         <li>
           (Optional) Drop it in the{" "}
-          <ProseLink href="https://discord.gg/RPX25Cvvj">
+          <ProseLink href="https://discord.gg/6Acme54jn">
             #video-contest
           </ProseLink>{" "}
           channel in our Discord.
