@@ -56,6 +56,10 @@ export const videoSubmissions = createTable(
     notes: d.text(),
     confirmationEmailSent: d.boolean().default(false),
     thankYouEmailSent: d.boolean().default(false),
+    rejected: d.boolean().default(false),
+    // Custom per-entry body for the rejection email.
+    rejectionEmailText: d.text(),
+    rejectionEmailSent: d.boolean().default(false),
     createdAt: d
       .timestamp({ withTimezone: true })
       .$defaultFn(() => /* @__PURE__ */ new Date())
@@ -77,6 +81,10 @@ export const hackathonSubmissions = createTable("hackathon_submission", (d) => (
   notes: d.text(),
   confirmationEmailSent: d.boolean().default(false),
   thankYouEmailSent: d.boolean().default(false),
+  rejected: d.boolean().default(false),
+  // Custom per-submission body for the rejection email.
+  rejectionEmailText: d.text(),
+  rejectionEmailSent: d.boolean().default(false),
   createdAt: d
     .timestamp({ withTimezone: true })
     .$defaultFn(() => /* @__PURE__ */ new Date())
