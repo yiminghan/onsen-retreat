@@ -200,6 +200,10 @@ export const artSubmissions = createTable("art_submission", (d) => ({
   marketingConsent: d.boolean().default(false).notNull(),
   notes: d.text(),
   confirmationEmailSent: d.boolean().default(false),
+  rejected: d.boolean().default(false),
+  // Custom per-submission body for the rejection email.
+  rejectionEmailText: d.text(),
+  rejectionEmailSent: d.boolean().default(false),
   createdAt: d
     .timestamp({ withTimezone: true })
     .$defaultFn(() => /* @__PURE__ */ new Date())
