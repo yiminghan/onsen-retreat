@@ -30,6 +30,19 @@ const MARKS: Mark[] = [
   { src: "/images/branding/timeline.svg", label: "Timeline" },
 ];
 
+const STICKERS: Mark[] = [
+  { src: "/images/stickers/onsen.png", label: "Onsen" },
+  { src: "/images/stickers/brain training.png", label: "Brain Training" },
+  { src: "/images/stickers/eh.png", label: "Eh" },
+  { src: "/images/stickers/global.png", label: "Global" },
+  { src: "/images/stickers/lightning.png", label: "Lightning" },
+  { src: "/images/stickers/old.png", label: "Old" },
+  { src: "/images/stickers/showering.png", label: "Showering" },
+  { src: "/images/stickers/take risk.png", label: "Take Risk" },
+  { src: "/images/stickers/tempura.png", label: "Tempura" },
+  { src: "/images/stickers/working.png", label: "Working" },
+];
+
 type Video = {
   src: string;
   label: string;
@@ -103,6 +116,32 @@ export default function BrandPage() {
                     }`}
                 >
 
+                  <span className="hidden group-hover:inline">Download ↓</span>
+                </span>
+              </a>
+            ))}
+          </div>
+        </section>
+
+        {/* Stickers */}
+        <section className="relative mt-24">
+          <div className="mt-8 grid grid-cols-2 gap-px bg-ink/10 sm:grid-cols-3">
+            {STICKERS.map((s) => (
+              <a
+                key={s.src}
+                href={encodeURI(s.src)}
+                download
+                className="group relative flex aspect-square flex-col items-center justify-center gap-5 bg-sand p-8 transition hover:bg-ink/[0.03]"
+              >
+                <div className="relative w-full flex-1">
+                  <Image
+                    src={s.src}
+                    alt={s.label}
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <span className="font-inclusive text-[0.65rem] tracking-[0.2em] text-ink/55 uppercase">
                   <span className="hidden group-hover:inline">Download ↓</span>
                 </span>
               </a>

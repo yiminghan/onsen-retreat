@@ -11,7 +11,7 @@
  * Safe to re-run: members who already have the role are skipped.
  */
 
-const ROLE_NAME = "Onsen Retreat #1";
+const ROLE_NAME = "ONSEN RETREAT OG";
 const ROLE_COLOR = 0xff7100; // --color-flame brand orange
 const AUDIT_REASON = "Onsen Retreat flair automation";
 
