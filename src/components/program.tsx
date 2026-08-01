@@ -58,7 +58,7 @@ export function Program() {
                 </Link>
                 <span className="text-ink">(3-4 Winners)</span>
                 <span className="ml-auto text-xs font-medium tracking-[0.15em] text-flame uppercase">
-                  Ends Jul 28
+                  Ended
                 </span>
               </li>
               <li className="flex items-baseline gap-2">
@@ -73,6 +73,16 @@ export function Program() {
                 </span>
               </li>
             </ul>
+            <p className="mt-6 text-lg leading-snug text-ink/80 font-medium">
+              Our contests have ended.{" "}
+              <Link
+                href="/signup"
+                className="text-flame underline underline-offset-4 transition-colors hover:text-ink"
+              >
+                Sign up to our list
+              </Link>{" "}
+              for future updates.
+            </p>
           </div>
 
           <div>
