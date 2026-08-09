@@ -13,13 +13,19 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
 
-const NAV_LINKS = [
+const COMPANY_LINKS = [
   { href: "/brand", label: "Brand" },
   { href: "/rules", label: "Rules" },
   { href: "/sponsor", label: "Sponsor" },
+];
+
+const NAV_LINKS = [
   { href: "https://shop.onsen-retreat.com", label: "Shop", external: true },
 ];
 
@@ -93,6 +99,26 @@ export function SiteHeader() {
           >
             <InstagramIcon className="size-6" />
           </a>
+          <DropdownMenu>
+            <DropdownMenuTrigger className="font-inclusive text-lg font-bold tracking-wide text-ink uppercase transition-opacity outline-none hover:opacity-60 lg:text-xl">
+              Company
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              align="center"
+              className="w-44 border-none bg-sand p-1.5 ring-1 ring-ink/15"
+            >
+              {COMPANY_LINKS.map((link) => (
+                <DropdownMenuItem
+                  key={link.label}
+                  asChild
+                  className="px-2.5 py-2 font-inclusive text-sm font-bold tracking-wide text-ink uppercase focus:bg-ink/5 focus:text-ink"
+                >
+                  <Link href={link.href}>{link.label}</Link>
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+
           {NAV_LINKS.map((link) =>
             link.external ? (
               <a
@@ -165,6 +191,22 @@ export function SiteHeader() {
               align="end"
               className="w-44 border-none bg-sand p-1.5 ring-1 ring-ink/15"
             >
+              <DropdownMenuSub>
+                <DropdownMenuSubTrigger className="px-2.5 py-2 font-inclusive text-sm font-bold tracking-wide text-ink uppercase focus:bg-ink/5 focus:text-ink data-open:bg-ink/5 data-open:text-ink">
+                  Company
+                </DropdownMenuSubTrigger>
+                <DropdownMenuSubContent className="w-40 border-none bg-sand p-1.5 ring-1 ring-ink/15">
+                  {COMPANY_LINKS.map((link) => (
+                    <DropdownMenuItem
+                      key={link.label}
+                      asChild
+                      className="px-2.5 py-2 font-inclusive text-sm font-bold tracking-wide text-ink uppercase focus:bg-ink/5 focus:text-ink"
+                    >
+                      <Link href={link.href}>{link.label}</Link>
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuSubContent>
+              </DropdownMenuSub>
               {NAV_LINKS.map((link) => (
                 <DropdownMenuItem
                   key={link.label}
