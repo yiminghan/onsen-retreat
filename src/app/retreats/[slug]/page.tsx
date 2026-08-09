@@ -102,7 +102,7 @@ export default async function RetreatPage({ params }: Props) {
           />
         </div>
         {retreat.description && (
-          <section className="mt-4 max-w-2xl">
+          <section className="mt-4 max-w-full">
             {retreat.description.split("\n\n").map((paragraph, index) => (
               <p
                 key={index}
