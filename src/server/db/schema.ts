@@ -1,7 +1,9 @@
-// Example model schema from the Drizzle docs
-// https://orm.drizzle.team/docs/sql-schema-declaration
-
-import { index, pgTableCreator, uniqueIndex } from "drizzle-orm/pg-core";
+import {
+  index,
+  pgEnum,
+  pgTableCreator,
+  uniqueIndex,
+} from "drizzle-orm/pg-core";
 
 /**
  * This is an example of how to use the multi-project schema feature of Drizzle ORM. Use the same
@@ -57,7 +59,6 @@ export const videoSubmissions = createTable(
     confirmationEmailSent: d.boolean().default(false),
     thankYouEmailSent: d.boolean().default(false),
     rejected: d.boolean().default(false),
-    // Custom per-entry body for the rejection email.
     rejectionEmailText: d.text(),
     rejectionEmailSent: d.boolean().default(false),
     createdAt: d
@@ -82,7 +83,6 @@ export const hackathonSubmissions = createTable("hackathon_submission", (d) => (
   confirmationEmailSent: d.boolean().default(false),
   thankYouEmailSent: d.boolean().default(false),
   rejected: d.boolean().default(false),
-  // Custom per-submission body for the rejection email.
   rejectionEmailText: d.text(),
   rejectionEmailSent: d.boolean().default(false),
   createdAt: d
@@ -212,6 +212,149 @@ export const rateLimit = createTable("rate_limit", (d) => ({
   lastRequest: d.bigint({ mode: "number" }),
 }));
 
+/**
+ * A single edition of the retreat (Retreat 001, 002, …). `slug` is the public
+ * URL segment under /retreats. `status` follows RETREAT_STATUSES in
+ * ~/lib/retreat — `draft` editions are hidden from the public pages.
+ */
+export const retreats = createTable(
+  "retreat",
+  (d) => ({
+    id: d.integer().primaryKey().generatedByDefaultAsIdentity(),
+    slug: d.varchar({ length: 128 }).notNull(),
+    name: d.varchar({ length: 256 }).notNull(),
+    description: d.text(),
+    location: d.varchar({ length: 256 }),
+    startDate: d.timestamp({ withTimezone: true }),
+    endDate: d.timestamp({ withTimezone: true }),
+    // Null means uncapped.
+    capacity: d.integer(),
+    coverImage: d.text(),
+    status: d.varchar({ length: 32 }).notNull().default("draft"),
+    // Soft-delete flag — "deleted" retreats keep their rows (and applications)
+    // but are excluded from all queries.
+    deleted: d.boolean().notNull().default(false),
+    applicationsCloseAt: d.timestamp({ withTimezone: true }),
+    createdAt: d.timestamp({ withTimezone: true }).notNull().defaultNow(),
+    updatedAt: d
+      .timestamp({ withTimezone: true })
+      .notNull()
+      .defaultNow()
+      .$onUpdate(() => new Date()),
+  }),
+  (t) => [
+    uniqueIndex("retreat_slug_idx").on(t.slug),
+    index("retreat_status_idx").on(t.status),
+  ],
+);
+
+/**
+ * One application per user per retreat, tagged by what it's for — a retreat
+ * seat, a hackathon build, a video, a piece of art. The three legacy
+ * *_submission tables are backfilled into this one (see
+ * scripts/backfill-retreat-applications.ts); those entries predate accounts, so
+ * `userId` is nullable and identity can live inline instead.
+ *
+ * `status` follows APPLICATION_STATUSES and `tag` follows APPLICATION_TAGS, both
+ * in ~/lib/retreat. Accepting an application creates the matching
+ * `retreatParticipants` row.
+ */
+export const retreatApplications = createTable(
+  "retreat_application",
+  (d) => ({
+    id: d.integer().primaryKey().generatedByDefaultAsIdentity(),
+    retreatId: d
+      .integer()
+      .notNull()
+      .references(() => retreats.id, { onDelete: "cascade" }),
+    // Null for backfilled contest entries with no matching account.
+    userId: d.text().references(() => user.id, { onDelete: "cascade" }),
+    // Identity as given on the original form — for account-less entries this is
+    // the only identity there is. Signed-in applicants read from `user`.
+    applicantName: d.varchar({ length: 256 }),
+    applicantEmail: d.varchar({ length: 320 }),
+    // Normalized IG handle (lowercased, no leading "@").
+    applicantHandle: d.varchar({ length: 256 }),
+    tag: d.varchar({ length: 32 }).notNull().default("retreat"),
+    status: d.varchar({ length: 32 }).notNull().default("submitted"),
+    // Why they want in, and what they'd build/bring. Null on backfilled
+    // entries, which had no such field.
+    motivation: d.text(),
+    project: d.text(),
+    // The build / artwork / repo.
+    projectLink: d.text(),
+    // Every video link lands here regardless of where it came from: a video
+    // entry's submission link, or a hackathon/art entry's demo video.
+    videoLink: d.text(),
+    // Whether the entrant consents to us using their entry as marketing material.
+    marketingConsent: d.boolean().notNull().default(false),
+    notes: d.text(),
+    // Internal, never returned to the applicant.
+    reviewNotes: d.text(),
+    // Which transactional emails this entry has already been sent, carried over
+    // from the legacy *_submission tables so we don't re-send on a re-run.
+    confirmationEmailSent: d.boolean().notNull().default(false),
+    thankYouEmailSent: d.boolean().notNull().default(false),
+    rejectionEmailText: d.text(),
+    rejectionEmailSent: d.boolean().notNull().default(false),
+    // Provenance of backfilled rows ("art_submission", 42). Null for
+    // applications made through the retreat form; the unique index below makes
+    // the backfill safe to re-run.
+    sourceTable: d.varchar({ length: 64 }),
+    sourceId: d.integer(),
+    decidedAt: d.timestamp({ withTimezone: true }),
+    createdAt: d.timestamp({ withTimezone: true }).notNull().defaultNow(),
+    updatedAt: d
+      .timestamp({ withTimezone: true })
+      .notNull()
+      .defaultNow()
+      .$onUpdate(() => new Date()),
+  }),
+  (t) => [
+    // Postgres treats NULLs as distinct, so this caps signed-in members at one
+    // application per retreat while letting account-less entries pile up.
+    uniqueIndex("retreat_application_retreat_user_idx").on(
+      t.retreatId,
+      t.userId,
+    ),
+    uniqueIndex("retreat_application_source_idx").on(t.sourceTable, t.sourceId),
+    index("retreat_application_retreat_idx").on(t.retreatId),
+    index("retreat_application_user_idx").on(t.userId),
+    index("retreat_application_tag_idx").on(t.tag),
+  ],
+);
+
+export const participantRoleEnum = pgEnum("onsen_participant_role", [
+  "organizer",
+  "volunteer",
+  "participant",
+]);
+
+
+export const retreatParticipants = createTable(
+  "retreat_participant",
+  (d) => ({
+    id: d.integer().primaryKey().generatedByDefaultAsIdentity(),
+    retreatId: d
+      .integer()
+      .notNull()
+      .references(() => retreats.id, { onDelete: "cascade" }),
+    membershipId: d
+      .integer()
+      .notNull()
+      .references(() => membership.id, { onDelete: "cascade" }),
+    role: participantRoleEnum().notNull().default("participant"),
+    createdAt: d.timestamp({ withTimezone: true }).notNull().defaultNow(),
+  }),
+  (t) => [
+    uniqueIndex("retreat_participant_retreat_membership_idx").on(
+      t.retreatId,
+      t.membershipId,
+    ),
+    index("retreat_participant_retreat_idx").on(t.retreatId),
+  ],
+);
+
 export const artSubmissions = createTable("art_submission", (d) => ({
   id: d.integer().primaryKey().generatedByDefaultAsIdentity(),
   name: d.varchar({ length: 256 }).notNull(),
@@ -225,7 +368,6 @@ export const artSubmissions = createTable("art_submission", (d) => ({
   notes: d.text(),
   confirmationEmailSent: d.boolean().default(false),
   rejected: d.boolean().default(false),
-  // Custom per-submission body for the rejection email.
   rejectionEmailText: d.text(),
   rejectionEmailSent: d.boolean().default(false),
   createdAt: d

@@ -25,7 +25,8 @@ const COMPANY_LINKS = [
   { href: "/sponsor", label: "Sponsor" },
 ];
 
-const NAV_LINKS = [
+const NAV_LINKS: { href: string; label: string; external?: boolean }[] = [
+  { href: "/retreats", label: "Retreats" },
   { href: "https://shop.onsen-retreat.com", label: "Shop", external: true },
 ];
 

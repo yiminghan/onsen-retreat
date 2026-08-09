@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { type Metadata } from "next";
 
 import { SiteHeader } from "~/components/site-header";
@@ -14,7 +15,10 @@ export default function LoginPage() {
       <SiteHeader />
 
       <main className="relative mx-auto max-w-xl px-6 pt-44 pb-28">
-        <LoginForm />
+        {/* LoginForm reads ?redirect= via useSearchParams. */}
+        <Suspense>
+          <LoginForm />
+        </Suspense>
       </main>
     </div>
   );

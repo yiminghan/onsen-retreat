@@ -5,6 +5,11 @@
 import "./src/env.js";
 
 /** @type {import("next").NextConfig} */
-const config = {};
+const config = {
+  images: {
+    // Cover images uploaded through /api/upload live in Supabase Storage.
+    remotePatterns: [{ protocol: "https", hostname: "*.supabase.co" }],
+  },
+};
 
 export default config;

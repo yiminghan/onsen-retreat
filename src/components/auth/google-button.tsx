@@ -29,7 +29,14 @@ function GoogleIcon({ className }: { className?: string }) {
   );
 }
 
-export function GoogleButton({ label = "Continue with Google" }: { label?: string }) {
+export function GoogleButton({
+  label = "Continue with Google",
+  redirect = "/",
+}: {
+  label?: string;
+  /** Same-site path to land on after Google sends the user back. */
+  redirect?: string;
+}) {
   const [isPending, setIsPending] = useState(false);
 
   return (
@@ -41,7 +48,7 @@ export function GoogleButton({ label = "Continue with Google" }: { label?: strin
         setIsPending(true);
         const { error } = await authClient.signIn.social({
           provider: "google",
-          callbackURL: `${window.location.origin}/`,
+          callbackURL: `${window.location.origin}${redirect}`,
         });
         if (error) {
           toast.error("Could not sign in with Google. Please try again.");

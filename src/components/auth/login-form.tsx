@@ -2,10 +2,11 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 
 import { authClient } from "~/lib/auth-client";
+import { safeRedirect } from "~/lib/redirect";
 import { AuthButton } from "~/components/auth/auth-button";
 import { GoogleButton } from "~/components/auth/google-button";
 import { Input } from "~/components/ui/input";
@@ -13,6 +14,8 @@ import { Label } from "~/components/ui/label";
 
 export function LoginForm() {
   const router = useRouter();
+  // Set by pages that send people here mid-flow (e.g. applying to a retreat).
+  const redirect = safeRedirect(useSearchParams().get("redirect"));
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isPending, setIsPending] = useState(false);
@@ -35,7 +38,7 @@ export function LoginForm() {
           const { error } = await authClient.signIn.email({
             email,
             password,
-            callbackURL: `${window.location.origin}/`,
+            callbackURL: `${window.location.origin}${redirect}`,
           });
           if (error) {
             if (error.status === 403) {
@@ -48,7 +51,7 @@ export function LoginForm() {
             setIsPending(false);
             return;
           }
-          router.push("/");
+          router.push(redirect);
           router.refresh();
         }}
         className="flex flex-col gap-4"
@@ -103,7 +106,7 @@ export function LoginForm() {
         <span className="h-px flex-1 bg-ink/15" />
       </div>
 
-      <GoogleButton />
+      <GoogleButton redirect={redirect} />
 
       <p className="text-center text-sm font-light text-ink/60">
         New here?{" "}

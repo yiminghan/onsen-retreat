@@ -10,6 +10,7 @@ import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
 
+import { isAdminEmail } from "~/server/admin";
 import { auth } from "~/server/auth";
 import { db } from "~/server/db";
 
@@ -128,3 +129,14 @@ export const protectedProcedure = t.procedure
       },
     });
   });
+
+/**
+ * Admin procedure — a protected procedure additionally gated on the caller's
+ * email being one of the reviewers in ~/server/admin.
+ */
+export const adminProcedure = protectedProcedure.use(({ ctx, next }) => {
+  if (!isAdminEmail(ctx.session.user.email)) {
+    throw new TRPCError({ code: "FORBIDDEN" });
+  }
+  return next({ ctx });
+});
