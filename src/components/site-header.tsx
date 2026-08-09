@@ -29,8 +29,7 @@ const NAV_LINKS = [
   { href: "https://shop.onsen-retreat.com", label: "Shop", external: true },
 ];
 
-// Hidden while the profile page is WIP — flip to true to show login/account.
-const SHOW_AUTH = false;
+const SHOW_AUTH = true;
 
 const INSTAGRAM_URL = "https://www.instagram.com/onsenretreat";
 
@@ -157,6 +156,12 @@ export function SiteHeader() {
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator className="bg-ink/10" />
                   <DropdownMenuItem
+                    asChild
+                    className="px-2.5 py-2 font-inclusive text-sm font-bold tracking-wide text-ink uppercase focus:bg-ink/5 focus:text-ink"
+                  >
+                    <Link href="/profile">Profile</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
                     onSelect={handleSignOut}
                     className="px-2.5 py-2 font-inclusive text-sm font-bold tracking-wide text-ink uppercase focus:bg-ink/5 focus:text-ink"
                   >
@@ -242,12 +247,20 @@ export function SiteHeader() {
               {SHOW_AUTH &&
                 !isPending &&
                 (session ? (
-                  <DropdownMenuItem
-                    onSelect={handleSignOut}
-                    className="px-2.5 py-2 font-inclusive text-sm font-bold tracking-wide text-ink uppercase focus:bg-ink/5 focus:text-ink"
-                  >
-                    Sign out
-                  </DropdownMenuItem>
+                  <>
+                    <DropdownMenuItem
+                      asChild
+                      className="px-2.5 py-2 font-inclusive text-sm font-bold tracking-wide text-ink uppercase focus:bg-ink/5 focus:text-ink"
+                    >
+                      <Link href="/profile">Profile</Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      onSelect={handleSignOut}
+                      className="px-2.5 py-2 font-inclusive text-sm font-bold tracking-wide text-ink uppercase focus:bg-ink/5 focus:text-ink"
+                    >
+                      Sign out
+                    </DropdownMenuItem>
+                  </>
                 ) : (
                   <DropdownMenuItem
                     asChild

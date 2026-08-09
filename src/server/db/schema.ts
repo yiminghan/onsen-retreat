@@ -179,6 +179,30 @@ export const verification = createTable(
   (t) => [index("verification_identifier_idx").on(t.identifier)],
 );
 
+// Retreat membership profile — one row per user, editable on /profile.
+// Social handles are normalized (lowercased, no leading "@" or URL).
+export const membership = createTable(
+  "membership",
+  (d) => ({
+    id: d.integer().primaryKey().generatedByDefaultAsIdentity(),
+    userId: d
+      .text()
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
+    bio: d.text(),
+    instagram: d.varchar({ length: 256 }),
+    twitter: d.varchar({ length: 256 }),
+    linkedin: d.varchar({ length: 256 }),
+    createdAt: d.timestamp({ withTimezone: true }).notNull().defaultNow(),
+    updatedAt: d
+      .timestamp({ withTimezone: true })
+      .notNull()
+      .defaultNow()
+      .$onUpdate(() => new Date()),
+  }),
+  (t) => [uniqueIndex("membership_user_id_idx").on(t.userId)],
+);
+
 // Persistent rate-limit storage — in-memory counters reset on every
 // serverless invocation, so Better Auth is configured to store them here.
 export const rateLimit = createTable("rate_limit", (d) => ({
