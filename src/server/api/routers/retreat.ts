@@ -13,6 +13,7 @@ import {
   membership,
   retreatApplications,
   retreatParticipants,
+  retreatRules,
   retreats,
   user,
 } from "~/server/db/schema";
@@ -183,7 +184,46 @@ export const retreatRouter = createTRPCRouter({
         )
         .orderBy(desc(retreatApplications.createdAt));
 
-      return { retreat, participants, applications };
+      const [ruleCount] = await ctx.db
+        .select({ count: count() })
+        .from(retreatRules)
+        .where(eq(retreatRules.retreatId, retreat.id));
+
+      return {
+        retreat,
+        participants,
+        applications,
+        hasRules: (ruleCount?.count ?? 0) > 0,
+      };
+    }),
+
+  /** Rule sections for one retreat, in display order — powers /retreats/[slug]/rules. */
+  rules: publicProcedure
+    .input(z.object({ slug: z.string().min(1).max(128) }))
+    .query(async ({ ctx, input }) => {
+      const [retreat] = await ctx.db
+        .select({ id: retreats.id, slug: retreats.slug, name: retreats.name })
+        .from(retreats)
+        .where(and(eq(retreats.slug, input.slug), publicRetreats))
+        .limit(1);
+
+      if (!retreat) {
+        throw new TRPCError({ code: "NOT_FOUND" });
+      }
+
+      const rules = await ctx.db
+        .select({
+          id: retreatRules.id,
+          sectionId: retreatRules.sectionId,
+          label: retreatRules.label,
+          groupLabel: retreatRules.groupLabel,
+          content: retreatRules.content,
+        })
+        .from(retreatRules)
+        .where(eq(retreatRules.retreatId, retreat.id))
+        .orderBy(retreatRules.sortOrder, retreatRules.id);
+
+      return { retreat, rules };
     }),
 
   /** The signed-in user's application for one retreat, or null. */

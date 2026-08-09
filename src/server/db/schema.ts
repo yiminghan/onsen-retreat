@@ -324,6 +324,41 @@ export const retreatApplications = createTable(
   ],
 );
 
+/**
+ * Rules & guide sections for one retreat — the DB-backed version of the static
+ * /rules page, shown on /retreats/[slug]/rules. One row per section; `content`
+ * is markdown. The UI groups sections by `groupLabel` (e.g. "General",
+ * "Contests") and orders them by `sortOrder`. Seeded from
+ * scripts/seed-retreat-rules.ts so future retreats can start from the same
+ * baseline and edit per-edition.
+ */
+export const retreatRules = createTable(
+  "retreat_rule",
+  (d) => ({
+    id: d.integer().primaryKey().generatedByDefaultAsIdentity(),
+    retreatId: d
+      .integer()
+      .notNull()
+      .references(() => retreats.id, { onDelete: "cascade" }),
+    // URL-hash id used for deep links (e.g. /retreats/001/rules#video-contest).
+    sectionId: d.varchar({ length: 128 }).notNull(),
+    label: d.varchar({ length: 256 }).notNull(),
+    groupLabel: d.varchar({ length: 256 }).notNull().default("General"),
+    content: d.text().notNull(),
+    sortOrder: d.integer().notNull().default(0),
+    createdAt: d.timestamp({ withTimezone: true }).notNull().defaultNow(),
+    updatedAt: d
+      .timestamp({ withTimezone: true })
+      .notNull()
+      .defaultNow()
+      .$onUpdate(() => new Date()),
+  }),
+  (t) => [
+    uniqueIndex("retreat_rule_retreat_section_idx").on(t.retreatId, t.sectionId),
+    index("retreat_rule_retreat_idx").on(t.retreatId),
+  ],
+);
+
 export const participantRoleEnum = pgEnum("onsen_participant_role", [
   "organizer",
   "volunteer",

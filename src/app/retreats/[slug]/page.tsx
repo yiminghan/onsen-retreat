@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { type Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { TRPCError } from "@trpc/server";
 
@@ -133,7 +134,18 @@ export default async function RetreatPage({ params }: Props) {
           ))}
         </dl>
 
-
+        {data.hasRules && (
+          <div className="w-full justify-end flex">
+            <p className="mt-6">
+              <Link
+                href={`/retreats/${slug}/rules`}
+                className="font-inclusive text-ink/55 hover:text-ink text-[0.65rem] tracking-[0.2em] uppercase underline underline-offset-4 transition"
+              >
+                Rules &amp; Guides →
+              </Link>
+            </p>
+          </div>
+        )}
 
         <RetreatApplication retreatId={retreat.id} />
 

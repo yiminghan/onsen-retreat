@@ -1,4 +1,15 @@
 [install]
 # react-email cuts frequent releases; exclude it from the global
 # minimumReleaseAge supply-chain delay so installs don't get blocked.
-minimumReleaseAgeExcludes = ["react-email"]
+# @supabase/supabase-js is excluded because its pinned range only matches
+# releases younger than the delay, which blocks unrelated installs.
+minimumReleaseAgeExcludes = [
+  "react-email",
+  "@supabase/supabase-js",
+  "@supabase/auth-js",
+  "@supabase/storage-js",
+  "@supabase/realtime-js",
+  "@supabase/functions-js",
+  "@supabase/postgrest-js",
+  "@supabase/node-fetch",
+]
