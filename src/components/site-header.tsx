@@ -21,7 +21,7 @@ import {
 
 const COMPANY_LINKS = [
   { href: "/brand", label: "Brand" },
-  { href: "/rules", label: "Rules" },
+  { href: "/retreats/retreat-001/rules", label: "Rules" },
   { href: "/sponsor", label: "Sponsor" },
 ];
 

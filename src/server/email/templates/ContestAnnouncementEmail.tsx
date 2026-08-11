@@ -32,7 +32,7 @@ function buildContests(baseUrl: string): Contest[] {
         "Make a short reel about the retreat and post it publicly on Instagram.",
       deadline: "Jul 25",
       ctaLabel: "Details",
-      ctaHref: `${baseUrl}/rules#video-contest`,
+      ctaHref: `${baseUrl}/retreats/retreat-001/rules#video-contest`,
     },
     {
       title: "Hackathon (3-4 Winners)",
@@ -40,7 +40,7 @@ function buildContests(baseUrl: string): Contest[] {
         "Build a project and make a casual demo video — who you are, your story, what you're building, and why it matters.",
       deadline: "Jul 25",
       ctaLabel: "Details",
-      ctaHref: `${baseUrl}/rules#hackathon`,
+      ctaHref: `${baseUrl}/retreats/retreat-001/rules#hackathon`,
     },
     {
       title: "Art / Design Contest (3-4 Winners)",
@@ -48,7 +48,7 @@ function buildContests(baseUrl: string): Contest[] {
         "Theme: PASSION. Submit any original art form — drawings, design, music, comics, (surprise us!).",
       deadline: "Jul 28",
       ctaLabel: "Details",
-      ctaHref: `${baseUrl}/rules#art-design-contest`,
+      ctaHref: `${baseUrl}/retreats/retreat-001/rules#art-design-contest`,
     },
   ];
 }

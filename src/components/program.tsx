@@ -26,7 +26,7 @@ export function Program() {
             <ul className="mt-3 space-y-1">
               <li className="flex items-baseline gap-2">
                 <Link
-                  href="/rules#video-contest"
+                  href="/retreats/retreat-001/rules#video-contest"
                   className="text-2xl font-light leading-snug tracking-tight text-ink underline-offset-4 transition-colors hover:text-flame hover:underline"
                 >
                   Video Contest
@@ -38,7 +38,7 @@ export function Program() {
               </li>
               <li className="flex items-baseline gap-2">
                 <Link
-                  href="/rules#hackathon"
+                  href="/retreats/retreat-001/rules#hackathon"
                   className="text-2xl font-light leading-snug tracking-tight text-ink underline-offset-4 transition-colors hover:text-flame hover:underline"
                 >
                   Hackathon
@@ -51,7 +51,7 @@ export function Program() {
               </li>
               <li className="flex items-baseline gap-2">
                 <Link
-                  href="/rules#art-design-contest"
+                  href="/retreats/retreat-001/rules#art-design-contest"
                   className="text-2xl font-light leading-snug tracking-tight text-ink underline-offset-4 transition-colors hover:text-flame hover:underline"
                 >
                   Art / Design Contest

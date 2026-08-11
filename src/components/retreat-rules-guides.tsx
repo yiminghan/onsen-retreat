@@ -23,9 +23,9 @@ export type RetreatRule = {
 };
 
 /**
- * Markdown element styling matched to the hand-written guides on /rules —
- * headings render like SubHeading, links like ProseLink, bold like the
- * `font-medium text-ink` emphasis spans.
+ * Markdown element styling matched to the hand-written guides once on /rules
+ * (now removed) — headings render like SubHeading, links like ProseLink, bold
+ * like the `font-medium text-ink` emphasis spans.
  */
 const heading = (children: React.ReactNode) => (
   <h3 className="mt-10 font-inclusive text-xl font-bold tracking-wide text-ink first:mt-0">
@@ -71,7 +71,7 @@ function RuleContent({ content }: { content: string }) {
 }
 
 /**
- * DB-driven version of the switcher on /rules (rules-guides.tsx): grouped
+ * DB-driven rules switcher (replaces the hand-written /rules page): grouped
  * sidebar on desktop, dropdown on mobile, hash deep-links, markdown content.
  */
 export function RetreatRulesGuides({ rules }: { rules: RetreatRule[] }) {

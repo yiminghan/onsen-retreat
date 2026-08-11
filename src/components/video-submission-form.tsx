@@ -68,7 +68,10 @@ export function VideoSubmissionForm() {
       </h1>
       <p className="mt-6 font-light leading-relaxed text-ink/60">
         For the full rules, see the{" "}
-        <a href="/rules#video-contest" className="underline">
+        <a
+          href="/retreats/retreat-001/rules#video-contest"
+          className="underline"
+        >
           contest details
         </a>
         .
