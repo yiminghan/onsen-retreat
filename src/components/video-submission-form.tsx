@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { toast } from "sonner";
 
 import { api } from "~/trpc/react";
@@ -68,12 +69,12 @@ export function VideoSubmissionForm() {
       </h1>
       <p className="mt-6 font-light leading-relaxed text-ink/60">
         For the full rules, see the{" "}
-        <a
+        <Link
           href="/retreats/retreat-001/rules#video-contest"
           className="underline"
         >
           contest details
-        </a>
+        </Link>
         .
       </p>
 
